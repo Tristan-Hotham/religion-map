@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Faith on the Map</title>
+<meta name="description" content="Religion around the world and across the UK: the religious make-up of {{world.n_countries|int}} countries in 2010 and 2020, every neighbourhood in England and Wales, Scotland's council areas and Northern Ireland's districts, and {{osm.total|int}} places of worship mapped in OpenStreetMap.">
+<meta property="og:title" content="Faith on the map: religion around the world and across the UK">
+<meta property="og:description" content="Christianity's centre moves to sub-Saharan Africa, the religiously unaffiliated grow, and in Scotland no religion is now the majority answer. An interactive map of religion from Pew Research Center data, three UK censuses and OpenStreetMap.">
+<meta property="og:image" content="https://maps.tristanhotham.com/religion-map/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/religion-map/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Vellum and ink: parchment paper, lapis, viridian, saffron. Religion colours are set in the script. */
+:root{
+  --bg:#F7F4EE; --panel:#EDE8DE; --fg:#1F1D2B; --muted:#676373; --rule:#E0DACE; --card:#FFFDF8; --border:#CFC7B8;
+  --hot:#3B5BA9; --cool:#2E8B57; --gold:#C98A1B; --land:#ECE6DA; --sea:#F2EFE9;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15151C; --panel:#20202A; --fg:#ECEAF2; --muted:#A3A0B2; --rule:#34343F; --card:#1C1C25; --border:#474656;
+  --hot:#8EA6E6; --cool:#6CC59A; --gold:#F0C060; --land:#282833; --sea:#1A1A22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15151C; --panel:#20202A; --fg:#ECEAF2; --muted:#A3A0B2; --rule:#34343F; --card:#1C1C25; --border:#474656;
+  --hot:#8EA6E6; --cool:#6CC59A; --gold:#F0C060; --land:#282833; --sea:#1A1A22; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:700px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1180px,calc(100vw - 32px));margin-left:calc((100% - min(1180px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--hot);color:#fff;padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(44px,11vw,96px)/.9 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 .a{color:var(--hot)} h1 .b{color:var(--gold)}
+.mark{width:clamp(78px,16vw,128px);height:auto;display:block}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:56ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em}
+.stats b.h{color:var(--hot)} .stats b.c{color:var(--cool)} .stats b.g{color:var(--gold)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:290px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;align-items:center;margin:0 0 10px;flex-wrap:wrap}
+.scrollrow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:2px;max-width:100%}
+.scrollrow .btn{flex:0 0 auto;white-space:nowrap}
+.scrollrow[hidden]{display:none}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px;flex:0 0 auto;align-self:center}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:0}
+.btn:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.tabs .btn[aria-pressed="true"]{background:var(--tab,var(--hot));border-color:var(--tab,var(--hot));color:#fff}
+.view .btn{font-size:13px;padding:9px 14px}
+.searchbox{position:relative;flex:1 1 260px;min-width:0}
+input[type=search]{font:400 15px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 11px;min-height:40px;width:100%}
+.suggest{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);z-index:1001;font:400 13px/1.3 var(--mono);display:none;max-height:340px;overflow:auto}
+.suggest li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.suggest li span{color:var(--muted)}
+.suggest li[aria-selected="true"],.suggest li:hover{background:var(--panel)}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+@media (max-width:900px){.mapgrid{grid-template-columns:1fr}}
+.side{background:var(--card);border:1px solid var(--border);padding:12px 12px 10px;font:400 13px/1.45 var(--mono);max-height:660px;overflow:auto}
+@media (max-width:900px){.side{max-height:none}}
+.side h4{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.side h4:first-child{margin-top:2px}
+.side .big{font:800 26px/1.1 var(--display);margin:2px 0 4px}
+.side .sub{color:var(--muted);font-size:12px;margin:0 0 8px}
+.side ol,.side ul{margin:4px 0 8px;padding-left:20px}
+.side li{margin:3px 0}
+.side table{width:100%;border-collapse:collapse;margin:4px 0 6px}
+.side td{padding:4px 4px 4px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.side td.num{text-align:right;white-space:nowrap}
+.side td.bar{width:38%}
+.side .bb{height:9px;border-radius:2px;display:block;min-width:1px}
+.side .bb.o{opacity:.35;margin-top:2px;height:5px}
+.chip{display:inline-block;font:500 11px/1 var(--mono);padding:4px 7px;border-radius:999px;color:#fff;margin:0 4px 4px 0}
+.go{cursor:pointer;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.15)}
+.lmap{height:620px;border:1px solid var(--border);background:var(--sea);border-radius:2px}
+@media (max-width:600px){.lmap{height:min(62vh,460px)}}
+.leaflet-container{font:400 12px/1.4 var(--mono);background:var(--sea)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--fg);border-radius:3px}
+.leaflet-popup-content{margin:10px 12px;font:400 12px/1.45 var(--mono);min-width:190px}
+.leaflet-popup-content b.t{font:700 16px/1.2 var(--display);display:block;margin-bottom:4px}
+.leaflet-popup-content .pr{display:flex;align-items:center;gap:6px;margin:2px 0}
+.leaflet-popup-content .pr i{display:inline-block;height:8px;border-radius:2px}
+.leaflet-popup-content .pr span{flex:0 0 108px}
+.leaflet-container a.leaflet-popup-close-button{color:var(--muted)}
+.lyrBtn{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;font:600 12px/1 var(--mono);padding:8px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.lyrBtn[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.lyrPanel{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:258px;box-shadow:0 2px 10px rgba(0,0,0,.15);font:400 12px/1.3 var(--mono);max-height:min(70vh,520px);overflow:auto}
+.lyrPanel[hidden]{display:none}
+.lyrPanel .row{margin:0 0 9px}
+.lyrPanel label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:600}
+.lyrPanel input[type=range]{width:100%;accent-color:var(--fg)}
+.lyrPanel select{font:400 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:2px;padding:2px 4px;width:100%;min-height:0}
+.lyrPanel .sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:11px;margin-top:3px}
+.lyrPanel .sub span{flex:0 0 58px}
+.lyrPanel .hd{font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 7px;border-top:1px solid var(--rule);padding-top:9px}
+.lyrPanel .reset{font:400 11px var(--mono);color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.cityL{font:500 11px/1 var(--mono);color:var(--fg);white-space:nowrap;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg),0 0 2px var(--bg);pointer-events:none}
+.cityL i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--fg);margin-right:4px;vertical-align:1px}
+.cityL.s{font-size:10px;font-weight:400}
+.cntL{font:700 11px/1 var(--mono);color:var(--fg);white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;opacity:.75;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg);pointer-events:none;text-align:center}
+.mapnote{background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--border);border-radius:3px;padding:6px 9px;font:400 12px/1.35 var(--mono);max-width:min(300px,62vw);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.mapnote b{font-weight:600}
+.mapnote:empty{display:none}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--card);color:var(--fg);border-bottom-color:var(--border)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.leaflet-control-attribution a{color:var(--fg)}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:13px;height:13px;margin-right:6px;border-radius:2px;border:1px solid rgba(0,0,0,.15)}
+.legend .t{color:var(--fg);font-weight:500}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--hot);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+.note h3{margin-top:0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+@media (max-width:760px){.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-left:8px solid var(--c,var(--hot));padding:12px 14px;font:400 13px/1.5 var(--mono)}
+.card b{font:600 19px/1.2 var(--display);display:block;margin-bottom:2px}
+.card .big{font:900 28px/1.05 var(--display);margin:6px 0 2px}
+.card .big span{color:var(--muted);font:400 13px/1 var(--mono)}
+.card button{margin-top:8px}
+details{margin:14px 0}
+summary{font:500 13px/1.4 var(--mono);cursor:pointer;color:var(--fg);padding:8px 0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--hot);border-color:var(--hot);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>Religion</span><span>World and UK, 2026</span></div>
+<header class="hero">
+  <h1>Faith on the <span class="a">map</span></h1>
+  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">Who belongs to which religion, and who to none, in {{world.n_countries|int}} countries and in every neighbourhood of England and Wales, with Scotland and Northern Ireland alongside. A decade of change around the world, a generation of change at home, and {{osm.total|int}} places of worship that volunteers have put on the map.</p>
+</header>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Data: Pew Research Center; ONS, NRS and NISRA censuses; OpenStreetMap; Natural Earth</div>
+
+<div class="stats">
+  <div><b class="h">{{world.regions.christian.Sub-Saharan Africa.2020|f1}}%</b><span>of the world's Christians lived in sub-Saharan Africa in 2020, up from {{world.regions.christian.Sub-Saharan Africa.2010|f1}}% in 2010</span></div>
+  <div><b class="c">+{{world.groups.muslim.growth_pct|f1}}%</b><span>growth in the number of Muslims, 2010 to 2020, against {{world.pop_growth_pct|f1}}% for the world's population</span></div>
+  <div><b>{{uk.scot.none|f1}}%</b><span>of people in Scotland said they had no religion in 2022: a majority</span></div>
+  <div><b class="g">{{uk.ew2021.christian|f1}}%</b><span>Christian in England and Wales in 2021, down from {{uk.ew2011.christian|f1}}% in 2011; no religion {{uk.ew2021.none|f1}}%</span></div>
+</div>
+
+<p class="lede">Religion is one of the oldest ways people have of saying who they are, and one of the hardest things to count. A census can only ask; a survey can only sample; a map of churches, mosques and temples only shows where someone has bothered to draw them. Put the best of these sources side by side, though, and a picture emerges of a world that is changing faster than many of us notice: in where the faithful live, in who says they have no religion at all, and, closer to home, in how differently the generations answer the same question.</p>
+<p>This page draws on three kinds of open data. <b>Pew Research Center</b>'s estimates give the religious make-up of {{world.n_countries|int}} countries and territories in 2010 and 2020, in seven groups: Christians, Muslims, the religiously unaffiliated, Hindus, Buddhists, Jews and other religions. The <b>censuses</b> of England and Wales (2011 and 2021), Scotland (2022) and Northern Ireland (2021, with a series back to 1861) give the UK in fine detail. And <b>OpenStreetMap</b>'s volunteers have tagged {{osm.total|int}} places of worship. Choose the world or the UK, pick a religion, and click any country, council or neighbourhood.</p>
+
+<h2><span class="n">01 · The map</span>Every country, every neighbourhood</h2>
+<div class="bleed" id="atlas">
+<div class="controls">
+  <div class="scrollrow view" id="viewRow"><span class="ctl-l">View</span><button class="btn" data-v="world" aria-pressed="true">World</button><button class="btn" data-v="uk" aria-pressed="false">United Kingdom</button></div>
+  <div class="scrollrow" id="measRow"><span class="ctl-l">Show</span><button class="btn" data-m="share" aria-pressed="true">Share</button><button class="btn" data-m="change" aria-pressed="false" id="chgBtn">Change 2010 to 2020</button></div>
+</div>
+<div class="controls">
+  <div class="scrollrow tabs" id="relTabs"><span class="ctl-l">Religion</span></div>
+</div>
+<div class="controls">
+  <div class="scrollrow" id="geoRow" hidden><span class="ctl-l">Areas</span><button class="btn" data-g="msoa" aria-pressed="true">Neighbourhoods</button><button class="btn" data-g="la" aria-pressed="false">Councils</button></div>
+  <div class="searchbox"><input type="search" id="q" placeholder="Search a country, council, neighbourhood or town" aria-label="Search a country, council, neighbourhood or town" autocomplete="off"><ul class="suggest" id="sug" role="listbox"></ul></div>
+</div>
+<div class="controls">
+  <div class="scrollrow" id="focusRow"><span class="ctl-l">Zoom to</span></div>
+</div>
+<div class="mapgrid">
+  <div><div id="map" class="lmap" role="application" aria-label="Map of religion"></div>
+    <div class="legend" id="legend"></div></div>
+  <div class="side" id="side" aria-live="polite"></div>
+</div>
+<p class="src" id="mapsrc"></p>
+</div>
+
+<h2><span class="n">02 · The world in 2020</span>Four big answers and many small ones</h2>
+<p>In 2020, by Pew's estimates, {{world.groups.christian.pct2020|f1}}% of the world's {{world.pop2020|bn}} billion people were Christians ({{world.groups.christian.bn2020|f2}} billion), {{world.groups.muslim.pct2020|f1}}% Muslims ({{world.groups.muslim.bn2020|f2}} billion), {{world.groups.none.pct2020|f1}}% religiously unaffiliated ({{world.groups.none.bn2020|f2}} billion) and {{world.groups.hindu.pct2020|f1}}% Hindus ({{world.groups.hindu.bn2020|f2}} billion). Buddhists made up {{world.groups.buddhist.pct2020|f1}}%, Jews {{world.groups.jewish.pct2020|f1}}% and all other religions together, from Sikhs and Baha'is to Shinto, Daoism and folk religions, {{world.groups.other.pct2020|f1}}%.</p>
+<div class="figure"><p class="fig-h">The world's religious make-up, 2010 and 2020</p><p class="fig-sub">Share of the world's population. Pale bar 2010, solid bar 2020. Pew Research Center estimates for {{world.n_countries|int}} countries and territories.</p><div class="chart" id="globChart"></div></div>
+<p>Christianity is the largest group in {{world.largest2020.christian|int}} countries and territories, Islam in {{world.largest2020.muslim|int}}, and the unaffiliated in {{world.largest2020.none|int}}, among them China, Japan, the Czech Republic and the Netherlands, and by 2020 Uruguay and New Zealand. Buddhists are the largest group in {{world.largest2020.buddhist|int}} places, from Sri Lanka to Mongolia, Hindus in {{world.largest2020.hindu|int}} (India, Nepal and Mauritius), Jews in one (Israel) and other religions in one (Taiwan). The unaffiliated are concentrated to a remarkable degree: China alone is home to {{world.china_share_of_none|pc}} of them.</p>
+<div class="cta"><a href="#atlas" data-world="largest">Largest group on the map</a><a href="#atlas" data-world="none" data-focus="156">The unaffiliated, China</a></div>
+
+<h2><span class="n">03 · A decade of change</span>Christianity moves south; the unaffiliated grow</h2>
+<p>Between 2010 and 2020 the world's population grew by {{world.pop_growth_pct|f1}}%. The number of Muslims grew fastest, by {{world.groups.muslim.growth_pct|f1}}% ({{world.groups.muslim.change_m|int}} million more people), and their share of the world rose from {{world.groups.muslim.pct2010|f1}}% to {{world.groups.muslim.pct2020|f1}}%. The religiously unaffiliated grew by {{world.groups.none.growth_pct|f1}}%, Hindus by {{world.groups.hindu.growth_pct|f1}}% and Christians by {{world.groups.christian.growth_pct|f1}}%, so the Christian share of the world fell from {{world.groups.christian.pct2010|f1}}% to {{world.groups.christian.pct2020|f1}}%. Buddhists were the only group to shrink in number, by {{world.groups.buddhist.growth_pct|absf1}}%, with the biggest falls in their share in {{world.top_change.buddhist.fall.0.name|raw}}, {{world.top_change.buddhist.fall.1.name|raw}} and {{world.top_change.buddhist.fall.2.name|raw}}.</p>
+<p>Christianity's centre of gravity also moved. In 2010 Europe was home to {{world.regions.christian.Europe.2010|f1}}% of the world's Christians and sub-Saharan Africa to {{world.regions.christian.Sub-Saharan Africa.2010|f1}}%. By 2020 the African share had risen to {{world.regions.christian.Sub-Saharan Africa.2020|f1}}% ({{world.ssa_christ_m2020|int}} million people) and the European share had fallen to {{world.regions.christian.Europe.2020|f1}}% ({{world.eur_christ_m2020|int}} million).</p>
+<div class="figure"><p class="fig-h">Where the world's Christians live</p><p class="fig-sub">Share of all Christians in each region. Pale bar 2010, solid bar 2020.</p><div class="chart" id="regChart"></div></div>
+<p>At the same time, the share of Christians fell in {{world.christ_down_n|int}} of the {{world.n_countries|int}} countries and territories, and the share with no religion rose in {{world.none_up_n|int}}. The biggest shifts came in the English-speaking world and the southern cone of South America: the unaffiliated share rose by {{world.top_change.none.rise.0.pp|f1}} points in {{world.top_change.none.rise.0.name|raw}}, {{world.top_change.none.rise.1.pp|f1}} in {{world.top_change.none.rise.1.name|raw}}, {{world.top_change.none.rise.2.pp|f1}} in {{world.top_change.none.rise.2.name|raw}} and {{world.top_change.none.rise.3.pp|f1}} in the {{world.top_change.none.rise.3.name|raw}}. In Uruguay and New Zealand the unaffiliated became the largest group.</p>
+<div class="figure"><p class="fig-h">The biggest rises in the share with no religion</p><p class="fig-sub">Change in the religiously unaffiliated share, 2010 to 2020, percentage points. Hover for both years.</p><div class="chart" id="noneChart"></div></div>
+<div class="cta"><a href="#atlas" data-world="none" data-mode="change">Change in the unaffiliated share</a><a href="#atlas" data-world="christian" data-mode="change">Change in the Christian share</a></div>
+
+<h2><span class="n">04 · Diversity</span>Where faiths live side by side</h2>
+<p>Pew also scores each country's religious diversity on a scale of 0 to 10, from a population that belongs entirely to one group to one spread evenly across all seven. The world as a whole scores {{world.rdi_world|f1}}, but most countries are much less mixed: {{world.rdi_levels.Very low|int}} rate as very low and only {{world.rdi_levels.Very high|int}} as very high. {{world.rdi_top.0.name|raw}} tops the list ({{world.rdi_top.0.rdi|f1}}), with Buddhists, Christians, Muslims, Hindus, people of other religions and people of no religion each making up at least 5% of the population, followed by {{world.rdi_top.1.name|raw}}, {{world.rdi_top.2.name|raw}}, {{world.rdi_top.3.name|raw}} and {{world.rdi_top.4.name|raw}}.</p>
+<div class="figure"><p class="fig-h">The most religiously diverse countries, 2020</p><p class="fig-sub">Pew Religious Diversity Index, 0 to 10. Bars split by each group's share of the population.</p><div class="chart" id="rdiChart"></div></div>
+<div class="cta"><a href="#atlas" data-world="rdi">Diversity on the map</a></div>
+
+<h2><span class="n">05 · Places of worship</span>A map of {{osm.total|int}} doors</h2>
+<p>Censuses and surveys count people. OpenStreetMap counts buildings, or rather the places of worship its volunteers have mapped: {{osm.total|int}} of them worldwide, {{osm.by_rel.christian|int}} tagged Christian, {{osm.by_rel.muslim|int}} Muslim, {{osm.by_rel.buddhist|int}} Buddhist, {{osm.by_rel.hindu|int}} Hindu and {{osm.by_rel.shinto|int}} Shinto ({{osm.top_shinto.0.pct|f1}}% of them in Japan), with {{osm.by_rel.jewish|int}} synagogues and {{osm.by_rel.sikh|int}} gurdwaras. Turn them on in the map's layers panel and you see the shape of religious landscapes: the parish churches of Europe, the mosques of Indonesia and Turkey, the Hindu temples of India and Nepal, the Buddhist temples of Myanmar and Thailand and the shrines of Japan.</p>
+<div class="figure"><p class="fig-h">Christian places of worship by tagged denomination</p><p class="fig-sub">Share of OpenStreetMap's Christian places of worship that carry a denomination tag, by Pew region. Only {{osm.christian_den_tagged_pct|pc}} carry one.</p><div class="chart" id="denChart"></div></div>
+<p>Where a denomination is tagged, the regions look very different. Catholic places make up {{osm.region_den.Europe.0.pct|pc}} of tagged churches in Europe and {{osm.region_den.Latin America-Caribbean.0.pct|pc}} in Latin America and the Caribbean, where Pentecostal ({{osm.region_den.Latin America-Caribbean.1.pct|pc}}) and evangelical churches come next. In North America Baptist churches lead ({{osm.region_den.North America.0.pct|pc}}), then Catholic and Methodist. In sub-Saharan Africa the largest tagged group is Orthodox, almost all of it Ethiopia's churches, ahead of Catholic and Pentecostal.</p>
+<div class="figure"><p class="fig-h">How thoroughly each region is mapped</p><p class="fig-sub">Places of worship in OpenStreetMap per 100,000 people, by Pew region (2020 population).</p><div class="chart" id="densChart"></div></div>
+<p>That second chart is the warning label. North America has {{osm.region.North America.per100k|f1}} mapped places of worship per 100,000 people and Europe {{osm.region.Europe.per100k|f1}}; sub-Saharan Africa, where most of the world's Christian growth is happening, has {{osm.region.Sub-Saharan Africa.per100k|f1}}. That is not because Africa has fewer churches and mosques but because fewer of them have been mapped, and many gather in homes, schools and halls that will never be tagged as places of worship. Read the layer as a map of where people have drawn buildings, not of where people pray.</p>
+<div class="cta"><a href="#atlas" data-osm="christian" data-zoomto="europe">Churches in Europe</a><a href="#atlas" data-osm="den" data-zoomto="usa">Denominations in the United States</a><a href="#atlas" data-osm="shinto" data-zoomto="japan">Shinto shrines in Japan</a></div>
+
+<h2><span class="n">06 · The United Kingdom</span>Four nations, three censuses</h2>
+<p>Each UK nation asks about religion in its own way. England and Wales ask "What is your religion?"; Scotland asks "What religion, religious denomination or body do you belong to?" and lists the Church of Scotland and Roman Catholic separately; Northern Ireland asks about current religion and then about the religion a person was brought up in. Scotland's census was a year later, in 2022. I have put the answers into common groups (no religion, Christian, Muslim, Hindu, Sikh, Jewish, Buddhist, other religion, not stated), as shares of everyone counted, but the differences in wording matter, and Northern Ireland's published tables do not separate the smaller faiths.</p>
+<div class="figure"><p class="fig-h">Religion in the four nations</p><p class="fig-sub">Share of all usual residents. England and Wales 2021, Scotland 2022, Northern Ireland 2021. In Northern Ireland, Muslim, Hindu, Sikh, Jewish and Buddhist are within other religion.</p><div class="chart" id="nationChart"></div></div>
+<p>In England and Wales, Christian is still the largest single answer, {{uk.ew2021.christian|f1}}% against {{uk.ew2021.none|f1}}% for no religion, but it is no longer a majority: in 2011 the figures were {{uk.ew2011.christian|f1}}% and {{uk.ew2011.none|f1}}%. In Wales, no religion is now the largest answer ({{uk.wal2021.none|f1}}% to {{uk.wal2021.christian|f1}}%). In Scotland it is a majority, {{uk.scot.none|f1}}%, with {{uk.scot_detail.cos|f1}}% Church of Scotland and {{uk.scot_detail.rc|f1}}% Roman Catholic. Northern Ireland remains the most Christian part of the UK ({{uk.ni.christian|f1}}%), though {{uk.ni.none|f1}}% said they had no religion. Muslims are the second largest religious group in England and Wales ({{uk.ew2021.muslim|f1}}%, up from {{uk.ew2011.muslim|f1}}%), followed by Hindus ({{uk.ew2021.hindu|f1}}%) and Sikhs ({{uk.ew2021.sikh|f1}}%).</p>
+<p>Council by council, no religion is now the most common answer in {{uk.la.largest.none|int}} of the UK's {{uk.la.n|int}} local authorities: {{uk.la.none_largest_by_nation.Scotland|int}} of Scotland's {{uk.la.n_by_nation.Scotland|int}} council areas, {{uk.la.none_largest_by_nation.Wales|int}} of Wales's {{uk.la.n_by_nation.Wales|int}} and {{uk.la.none_largest_by_nation.England|int}} in England. On the same comparison in 2011, it was the most common answer in {{uk.la.ew_none_largest_2011|int}} of the councils of England and Wales. The Christian share fell in every one of them ({{uk.la.ew_christian_fell|int}} of {{uk.la.ew_n|int}}), most of all in the North East and Yorkshire: by {{uk.la.change.christian.fall.0.pp|f1}} points in {{uk.la.change.christian.fall.0.name|raw}}. It fell least in diverse London boroughs such as {{uk.la.change.christian.rise.2.name|raw}} and {{uk.la.change.christian.rise.1.name|raw}}.</p>
+<div class="figure"><p class="fig-h">England and Wales, 2011 and 2021</p><p class="fig-sub">Share of all usual residents. Pale bar 2011, solid bar 2021.</p><div class="chart" id="ewChart"></div></div>
+<p>The neighbourhood map shows how local the picture is. Among the {{uk.msoa.n|int}} neighbourhoods (middle layer super output areas, of about 8,000 people each) of England and Wales, no religion is the most common answer in {{uk.msoa.none_largest|int}}, led by central Brighton and Hove, where up to {{uk.msoa.top.none.0.pct|pc}} said so. Christian is a majority in {{uk.msoa.christian_majority|int}}, with the highest shares in parts of Liverpool and Knowsley (up to {{uk.msoa.top.christian.0.pct|pc}}). Other faiths are concentrated in particular places: Muslims in parts of Birmingham, Blackburn and Bradford (up to {{uk.msoa.top.muslim.0.pct|pc}}), Hindus in Leicester and Brent (up to {{uk.msoa.top.hindu.0.pct|pc}}), Sikhs in Ealing, Wolverhampton and Birmingham (up to {{uk.msoa.top.sikh.0.pct|pc}}), Jewish communities in Salford, Bury and north London (up to {{uk.msoa.top.jewish.0.pct|pc}}), and Buddhists around Aldershot in {{uk.la.top.buddhist.0.name|raw}} (up to {{uk.msoa.top.buddhist.0.pct|pc}}).</p>
+<div class="cards" id="cards"></div>
+<p>The detailed answers in England and Wales add texture: {{uk.det.Pagan|int}} people wrote Pagan, {{uk.det.Alevi|int}} Alevi, {{uk.det.Jain|int}} Jain, {{uk.det.Wicca|int}} Wicca and {{uk.det.Ravidassia|int}} Ravidassia; among people of no religion, {{uk.det.Agnostic|int}} wrote agnostic and {{uk.det.Atheist|int}} atheist.</p>
+
+<h2><span class="n">07 · Generations</span>The young answer differently</h2>
+<p>The biggest divide in the census is not between places but between ages. In England and Wales, {{uk.age.England and Wales.6.christian|pc}} of people aged 75 and over said they were Christian and {{uk.age.England and Wales.6.none|pc}} said they had no religion. Among 25 to 34 year olds the figures were almost reversed: {{uk.age.England and Wales.2.christian|pc}} Christian and {{uk.age.England and Wales.2.none|pc}} no religion. The two lines cross among people in their late thirties and forties. Children's answers were usually given by a parent. The Muslim share is highest among the young: {{uk.age.England and Wales.0.muslim|f1}}% of under 16s, against {{uk.age.England and Wales.6.muslim|f1}}% of people aged 75 and over.</p>
+<div class="figure"><p class="fig-h">Religion by age, England and Wales, 2021</p><p class="fig-sub">Share of each age group answering Christian, no religion or Muslim.</p><div class="chart" id="ageChart"></div></div>
+<p class="pull">Among people aged 75 and over in England and Wales, {{uk.age.England and Wales.6.christian|pc}} said they were Christian. Among 25 to 34 year olds, {{uk.age.England and Wales.2.none|pc}} said they had no religion.</p>
+
+<h2><span class="n">08 · Northern Ireland</span>Sixteen censuses, 1861 to 2021</h2>
+<p>Northern Ireland's statistics agency has published religion from every census since 1861, for the area that became Northern Ireland. In 1861, {{uk.ni_h.cath1861|f1}}% of people were Catholic and {{uk.ni_h.prot1861|f1}}% belonged to the three largest Protestant churches (Presbyterian, Church of Ireland and Methodist). The Protestant share peaked at {{uk.ni_h.prot_peak|f1}}% in {{uk.ni_h.prot_peak_year|raw}}; the Catholic share fell to {{uk.ni_h.cath_min|f1}}% in {{uk.ni_h.cath_min_year|raw}}, a census marked by a campaign of non-cooperation and a high number of people not stating a religion. Since {{uk.ni_h.cross_year|raw}} Catholics have outnumbered the three main Protestant churches combined, and in 2021 the figures were {{uk.ni_h.cath2021|f1}}% and {{uk.ni_h.prot2021|f1}}%, with {{uk.ni_h.nons2021|f1}}% giving no religion or not stating one.</p>
+<div class="figure"><p class="fig-h">Religion in Northern Ireland, 1861 to 2021</p><p class="fig-sub">Share of usual residents by current religion. 'Other' includes smaller Protestant and other Christian denominations as well as other religions.</p><div class="chart" id="niChart"></div></div>
+<p>Counting by religion brought up in as well as current religion, the census gives the wider community background: {{uk.ni_brought_up.cath|f1}}% Catholic, {{uk.ni_brought_up.prot|f1}}% Protestant and other Christian, {{uk.ni_brought_up.other|f1}}% other religions and {{uk.ni_brought_up.none|f1}}% none. On that measure, too, Catholic background is now the larger.</p>
+<div class="cta"><a href="#atlas" data-uk="christian" data-zoomto="ni">Northern Ireland on the map</a></div>
+
+<h2><span class="n">09 · How I did this</span>Methods and caveats</h2>
+<p><b>The world.</b> Pew Research Center's 'Religious Composition 2010 to 2020' dataset gives, for {{world.n_countries|int}} countries and territories with at least 100,000 people, the estimated number and share of Christians, Muslims, religiously unaffiliated people, Buddhists, Hindus, Jews and people of other religions in 2010 and 2020, built from more than 2,700 censuses, surveys and registers, and a diversity index. I use Pew's percentages and its rounded counts, as it recommends. Countries are joined to Natural Earth outlines by their UN codes; French overseas departments are drawn as part of France, Somaliland with Somalia's figures, and Northern Cyprus without data.</p>
+<p><b>The UK.</b> England and Wales: census 2021 tables TS030 (religion, for every local authority and middle layer super output area) and TS031 (detailed religion), and 2011 table KS209EW, from Nomis. 2011 districts are added together into the 2023 councils they merged into. Scotland: census 2022 table UV205 (National Records of Scotland), with the Church of Scotland, Roman Catholic and other Christian added together as Christian and Pagan included in other religion. Northern Ireland: census 2021 tables MS-B19, MS-B23 and MS-B22 (NISRA). Shares are of all usual residents, including people who did not answer. The question on religion is voluntary in all three censuses. Religion by age comes from table RM118; its age labels were blank in the download, so I identified the bands from their population totals.</p>
+<p><b>Places of worship.</b> Every OpenStreetMap feature tagged amenity=place_of_worship, counted per quarter degree square by its religion and denomination tags, and placed in a country by the centre of its square. Denomination tags are grouped into families (Catholic, Orthodox, Anglican, Lutheran, Reformed and Presbyterian, Baptist, Methodist, Pentecostal and others). Only {{osm.christian_den_tagged_pct|pc}} of Christian places carry a denomination tag and {{osm.untagged_rel_pct|f1}}% of all places have no religion tag at all.</p>
+<p><b>What this is not.</b> Belonging is not the same as believing or practising, and none of these sources measures faith, attendance or devotion. Pew's figures are estimates, often projected from older censuses and surveys. Census answers depend on the wording of the question, and many people who tick a box seldom attend a service, while others who say "no religion" pray. The page describes and does not rank or judge any religion or none. The colours are chosen only to tell groups apart.</p>
+<details><summary>Sources and licences</summary>
+<ul>
+<li>Pew Research Center (2025), 'How the Global Religious Landscape Changed From 2010 to 2020', dataset 'Religious Composition 2010-2020' with diversity statistics (2026), retrieved {{meta.retrieved|raw}}. Used with attribution; Pew Research Center bears no responsibility for the analyses or interpretations of the data presented here.</li>
+<li>Office for National Statistics, Census 2021 and Census 2011, via Nomis. Contains public sector information licensed under the Open Government Licence v3.0.</li>
+<li>National Records of Scotland, Scotland's Census 2022, table UV205, via the UK Data Service. © Crown copyright, Open Government Licence v3.0.</li>
+<li>Northern Ireland Statistics and Research Agency, Census 2021 tables MS-B19, MS-B22 and MS-B23. © Crown copyright, Open Government Licence v3.0.</li>
+<li>OpenStreetMap contributors, via QLever. ODbL 1.0. Counts per square are a derived database under the ODbL.</li>
+<li>Boundaries: Office for National Statistics (MSOA 2021, local authority districts December 2023), Open Government Licence v3.0, contains OS data © Crown copyright and database right; Natural Earth countries and populated places (public domain).</li>
+<li>Base map tiles © Esri.</li>
+</ul></details>
+
+<div class="cta"><a class="p" href="https://doi.org/{{meta.doi|raw}}">Read the paper</a><a href="https://github.com/Tristan-Hotham/religion-map">Data and code</a><a href="{{meta.blog|raw}}">Blog post</a></div>
+
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) Faith on the map: religion around the world and across the UK, from Pew Research Center estimates, the UK censuses and OpenStreetMap. Zenodo. <a href="https://doi.org/{{meta.doi|raw}}">https://doi.org/{{meta.doi|raw}}</a></p>
+<p>Licence: text, figures and derived data CC BY 4.0 (OpenStreetMap counts ODbL 1.0; census data Open Government Licence v3.0), code MIT. Pew Research Center is not responsible for the analysis.</p>
+<p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const R = /*RESULTS*/;
+const SITE = /*SITE*/;
+const WORLD = /*WORLD*/;
+const CITIES = /*CITIES*/;
+const fmt = n => n == null || n === "" ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const f1 = n => n == null ? "n/a" : (+n).toFixed(1);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+document.addEventListener("click", hideTip);
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const redraws = [];
+function resp(box, render) { let last = 0; const go = force => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const small = () => innerWidth < 900;
+const COL = SITE.col, WK = SITE.wk, UK = SITE.uk, WN = SITE.wname, UN = SITE.uname;
+const tipOn = (e, h) => { e.addEventListener("mousemove", ev => showTip(h, ev.clientX, ev.clientY)); e.addEventListener("mouseleave", hideTip); };
+
+/* hero mark: a ring of the world's religious make-up in 2020 */
+(function () {
+  const g = document.getElementById("heroMark"); const W = R.world.groups; let a0 = -Math.PI / 2; const cx = 60, cy = 60, r0 = 30, r1 = 56;
+  WK.forEach(k => { const a1 = a0 + 2 * Math.PI * W[k].pct2020 / 100; const big = a1 - a0 > Math.PI ? 1 : 0; const p = (r, a) => `${cx + r * Math.cos(a)} ${cy + r * Math.sin(a)}`;
+    el("path", { d: `M${p(r1, a0)} A${r1} ${r1} 0 ${big} 1 ${p(r1, a1)} L${p(r0, a1)} A${r0} ${r0} 0 ${big} 0 ${p(r0, a0)} Z`, fill: COL[k], stroke: "var(--bg)", "stroke-width": 1.5 }, g); a0 = a1; });
+})();
+
+/* ---------- map machinery ---------- */
+const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/";
+const ESRI_ATT = 'Tiles &copy; Esri, HERE, Garmin, USGS, NGA, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, and the GIS user community';
+const LYDEF = { base: "plain", hills: true, hillK: 45, labels: false, labelK: 80, names: true, nameLvl: 1, cnames: true, borders: true, colour: 85, fill: true, osm: false, osmRel: "all" };
+const LY = { ...LYDEF };
+try { Object.assign(LY, JSON.parse(localStorage.getItem("religion_layers") || "{}")); } catch (e) {}
+const saveLY = () => { try { localStorage.setItem("religion_layers", JSON.stringify(LY)); } catch (e) {} };
+const map = L.map("map", { minZoom: 1, maxZoom: 14, maxBounds: [[-75, -200], [86, 200]], zoomSnap: .5, preferCanvas: true }).setView([25, 12], small() ? 1 : 2);
+["hills:250", "fill:400", "osm:450", "labels:470", "names:620"].forEach(s => { const [n, z] = s.split(":"); map.createPane(n); map.getPane(n).style.zIndex = z; });
+["hills", "labels", "names", "osm"].forEach(n => map.getPane(n).style.pointerEvents = "none");
+const rend = L.canvas({ pane: "fill", padding: .3, tolerance: 2 });
+let base = null, hills = null, labels = null; const names = L.layerGroup(), cnames = L.layerGroup();
+function setTiles() {
+  [base, labels, hills].forEach(l => { if (l) map.removeLayer(l); });
+  const t = isDark() ? "Dark" : "Light";
+  const url = LY.base === "relief" ? ESRI + "World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}" : LY.base === "satellite" ? ESRI + "World_Imagery/MapServer/tile/{z}/{y}/{x}" : LY.base === "street" ? ESRI + "World_Street_Map/MapServer/tile/{z}/{y}/{x}" : `${ESRI}Canvas/World_${t}_Gray_Base/MapServer/tile/{z}/{y}/{x}`;
+  base = L.tileLayer(url, { maxZoom: 16, maxNativeZoom: LY.base === "relief" ? 13 : 16, attribution: ESRI_ATT }).addTo(map);
+  hills = L.tileLayer(ESRI + "Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}", { maxZoom: 16, maxNativeZoom: 16, pane: "hills" });
+  labels = L.tileLayer(`${ESRI}Canvas/World_${t}_Gray_Reference/MapServer/tile/{z}/{y}/{x}`, { maxZoom: 16, pane: "labels" });
+  applyLayers();
+}
+function applyLayers() {
+  if (!base) return;
+  if (LY.hills) { hills.addTo(map); hills.setOpacity(Math.min(1, .15 + LY.hillK / 120)); } else map.removeLayer(hills);
+  if (LY.labels) { labels.addTo(map); labels.setOpacity(LY.labelK / 100); } else map.removeLayer(labels);
+  if (LY.names) names.addTo(map); else map.removeLayer(names);
+  if (LY.cnames) cnames.addTo(map); else map.removeLayer(cnames);
+  if (LY.osm) { loadOSM(); } else if (osmLayer && map.hasLayer(osmLayer)) map.removeLayer(osmLayer);
+  restyle(); placeNames(); legend();
+}
+function placeNames() {
+  names.clearLayers(); cnames.clearLayers();
+  const z = map.getZoom(), bb = map.getBounds().pad(.05); const boxes = [];
+  if (LY.names) {
+    const minPop = [[2, 8e6], [3, 3e6], [4, 1e6], [5, 4e5], [6, 1.5e5], [7, 6e4], [99, 2e4]].find(([zz]) => z < zz + (LY.nameLvl === 2 ? 1.5 : LY.nameLvl === 0 ? -1 : 0))[1] * (LY.nameLvl === 0 ? 2 : 1);
+    let n = 0;
+    for (const c of CITIES) {
+      if (c.pop < minPop || !bb.contains([c.lat, c.lon])) continue;
+      const pt = map.latLngToContainerPoint([c.lat, c.lon]), big = c.pop >= 5e6 || (z >= 6 && c.pop >= 4e5);
+      const bx = [pt.x - 4, pt.y - 8, pt.x + 10 + c.name.length * (big ? 6.9 : 6.3), pt.y + 7];
+      if (boxes.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue;
+      boxes.push(bx); L.marker([c.lat, c.lon], { pane: "names", interactive: false, keyboard: false, icon: L.divIcon({ className: "cityL" + (big ? "" : " s"), html: `<i></i>${esc(c.name)}`, iconSize: null, iconAnchor: [3, 6] }) }).addTo(names);
+      if (++n >= 140) break;
+    }
+  }
+  if (LY.cnames && S.view === "world" && z >= 3 && z < 7) {
+    WORLD.features.forEach(f => { const g = SITE.cpos[f.properties.iso]; if (!g || !bb.contains([g[1], g[0]])) return; const nm = f.properties.name;
+      if (z < 4 && (g[2] || 0) < 2e7) return; const pt = map.latLngToContainerPoint([g[1], g[0]]), w = nm.length * 7.2;
+      const bx = [pt.x - w / 2, pt.y - 7, pt.x + w / 2, pt.y + 7]; if (boxes.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) return; boxes.push(bx);
+      L.marker([g[1], g[0]], { pane: "names", interactive: false, keyboard: false, icon: L.divIcon({ className: "cntL", html: esc(nm), iconSize: [w, 14], iconAnchor: [w / 2, 7] }) }).addTo(cnames); });
+  }
+}
+(function layerControl() {
+  const Ctl = L.Control.extend({ options: { position: "topright" }, onAdd() {
+    const d = L.DomUtil.create("div"); L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
+    d.innerHTML = `<button class="lyrBtn" aria-expanded="false">Map layers</button>
+<div class="lyrPanel" hidden>
+ <div class="row"><label style="font-weight:600">Base map</label><div class="sub"><select data-k="base" aria-label="Base map"><option value="plain">Plain grey</option><option value="street">Streets</option><option value="relief">Shaded relief</option><option value="satellite">Satellite</option></select></div></div>
+ <div class="row"><label><input type="checkbox" data-k="hills"> Hills and mountains</label><div class="sub"><span>strength</span><input type="range" data-k="hillK" min="10" max="100" step="5" aria-label="Hill shading strength"></div></div>
+ <div class="row"><label><input type="checkbox" data-k="labels"> Map labels</label><div class="sub"><span>strength</span><input type="range" data-k="labelK" min="20" max="100" step="5" aria-label="Map label strength"></div></div>
+ <div class="row"><label><input type="checkbox" data-k="names"> Bold place names</label><div class="sub"><span>how many</span><select data-k="nameLvl" aria-label="How many place names"><option value="0">Biggest only</option><option value="1">Some</option><option value="2">Lots</option></select></div></div>
+ <div class="row"><label><input type="checkbox" data-k="cnames"> Country names</label></div>
+ <div class="row"><label><input type="checkbox" data-k="borders"> Boundaries</label></div>
+ <div class="hd">Religion</div>
+ <div class="row"><label><input type="checkbox" data-k="fill"> Shading by religion</label><div class="sub"><span>strength</span><input type="range" data-k="colour" min="20" max="100" step="5" aria-label="Colour strength"></div></div>
+ <div class="row"><label><input type="checkbox" data-k="osm"> Places of worship (OpenStreetMap)</label><div class="sub"><select data-k="osmRel" aria-label="Which places of worship"><option value="all">All religions</option><option value="christian">Christian</option><option value="muslim">Muslim</option><option value="buddhist">Buddhist</option><option value="hindu">Hindu</option><option value="shinto">Shinto</option><option value="jewish">Jewish</option><option value="sikh">Sikh</option><option value="taoist">Taoist</option><option value="den">Christian: main tagged denomination</option></select></div></div>
+ <button class="reset">Reset layers</button>
+</div>`;
+    return d; } });
+  map.addControl(new Ctl());
+  const box = map.getContainer(), btn = box.querySelector(".lyrBtn"), pan = box.querySelector(".lyrPanel");
+  btn.onclick = () => { const o = pan.hidden; pan.hidden = !o; btn.setAttribute("aria-expanded", o); };
+  const sync = () => pan.querySelectorAll("[data-k]").forEach(i => { const k = i.dataset.k; if (i.type === "checkbox") i.checked = LY[k]; else i.value = LY[k]; });
+  pan.querySelectorAll("[data-k]").forEach(i => i.addEventListener(i.type === "range" ? "input" : "change", () => {
+    const k = i.dataset.k; LY[k] = i.type === "checkbox" ? i.checked : (k === "base" || k === "osmRel" ? i.value : +i.value);
+    if (k === "hillK") LY.hills = true; if (k === "labelK") LY.labels = true; if (k === "nameLvl") LY.names = true; if (k === "osmRel") LY.osm = true; if (k === "colour") LY.fill = true;
+    sync(); saveLY(); if (k === "base") setTiles(); else { applyLayers(); if (osmLayer) osmLayer.redraw(); }
+  }));
+  pan.querySelector(".reset").onclick = () => { Object.assign(LY, LYDEF); saveLY(); sync(); setTiles(); };
+  window.syncLayers = sync; sync();
+})();
+const Note = L.Control.extend({ options: { position: "bottomleft" }, onAdd() { const d = L.DomUtil.create("div", "mapnote"); d.id = "mapnote"; L.DomEvent.disableClickPropagation(d); return d; } });
+map.addControl(new Note());
+L.control.scale({ imperial: false, position: "bottomright" }).addTo(map);
+
+/* ---------- state ---------- */
+const S = { view: "world", wrel: "largest", urel: "largest", mode: "share", geo: "msoa", sel: null };
+const WREL = [["largest", "Largest group", "#1F1D2B"]].concat(WK.map(k => [k, WN[k], COL[k]])).concat([["rdi", "Diversity", "#7A4E8C"]]);
+const UREL = [["largest", "Largest answer", "#1F1D2B"]].concat(UK.map(k => [k, UN[k], COL[k]]));
+const rel = () => S.view === "world" ? S.wrel : S.urel;
+
+/* ---------- colours ---------- */
+function mix(a, b, t) { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const A = p(a), B = p(b); return "#" + A.map((x, i) => Math.round(x + (B[i] - x) * t).toString(16).padStart(2, "0")).join(""); }
+const landHex = () => isDark() ? "#2b2b36" : "#efe9dd";
+const WBINS = [1, 5, 10, 25, 50, 75, 90];
+const UBINS = { christian: [20, 30, 40, 50, 60, 70, 80], none: [10, 20, 30, 40, 50, 60], notstated: [3, 4, 5, 6, 8, 10, 12] };
+const UB_MIN = [0.5, 1, 2, 5, 10, 20, 40];
+const CBINS = [-15, -10, -5, -2, -0.5, 0.5, 2, 5, 10, 15];
+const DECR = "#9A6A44";
+const binsFor = k => S.view === "world" ? WBINS : (UBINS[k] || UB_MIN);
+function seqCol(v, k) { if (v == null) return null; const b = binsFor(k); let i = -1; b.forEach((x, j) => { if (v >= x) i = j; }); const t = (i + 1) / b.length; return mix(landHex(), COL[k], (isDark() ? .25 : .12) + .82 * t); }
+function divCol(v, k) { if (v == null) return null; let i = 0; CBINS.forEach((x, j) => { if (v >= x) i = j + 1; }); const mid = 5; if (i === mid) return isDark() ? "#55535e" : "#e4ded2"; const t = Math.abs(i - mid) / mid; return mix(landHex(), i > mid ? COL[k] : DECR, .25 + .72 * t); }
+const rdiCol = v => v == null ? null : mix(landHex(), "#5B3A7A", .1 + .85 * Math.min(1, v / 8));
+function largestKey(arr, keys) { let best = null, bv = -1; keys.forEach((k, i) => { if (k === "notstated" || arr[i] == null) return; if (arr[i] > bv) { bv = arr[i]; best = k; } }); return [best, bv]; }
+function largestCol(k, share) { return mix(landHex(), COL[k], share >= 50 ? .95 : .55); }
+
+/* ---------- world layer ---------- */
+const pewOf = iso => SITE.iso2pew[iso];
+function wVal(code) {
+  const c = SITE.c[code]; if (!c) return null; const k = S.wrel;
+  if (k === "largest") { const [b, v] = largestKey(c.b, WK); return { k: b, v }; }
+  if (k === "rdi") return c.d[0];
+  const i = WK.indexOf(k); return S.mode === "change" ? c.b[i] - c.a[i] : c.b[i];
+}
+function wFill(code) {
+  const v = wVal(code); if (v == null) return null; const k = S.wrel;
+  if (k === "largest") return largestCol(v.k, v.v);
+  if (k === "rdi") return rdiCol(v);
+  return S.mode === "change" ? divCol(v, k) : seqCol(v, k);
+}
+function wStyle(f) {
+  const code = pewOf(f.properties.iso), fill = code ? wFill(code) : null, sel = S.view === "world" && code && code === S.sel;
+  return { color: sel ? css("--fg") : (isDark() ? "#55535e" : "#ffffff"), weight: LY.borders ? (sel ? 2.4 : .6) : (sel ? 2 : 0), fillColor: fill || css("--land"), fillOpacity: LY.fill ? (fill ? .92 : .5) * LY.colour / 100 : 0 };
+}
+const wLayer = L.geoJSON(WORLD, { renderer: L.svg({ pane: "fill", padding: .3 }), style: wStyle, onEachFeature: (f, l) => {
+  l.on("click", e => { const code = pewOf(f.properties.iso); if (code) pickCountry(code, false, e.latlng); else noData(f.properties.name, e.latlng); });
+  l.on("mousemove", e => { const r = map.getContainer().getBoundingClientRect(); showTip(wTip(f), r.left + e.containerPoint.x, r.top + e.containerPoint.y); });
+  l.on("mouseout", hideTip);
+} });
+function wTip(f) {
+  const code = pewOf(f.properties.iso), c = SITE.c[code]; if (!c) return `<b>${esc(f.properties.name)}</b><br>No estimate`;
+  const k = S.wrel, v = wVal(code);
+  if (k === "largest") return `<b>${esc(c.n)}</b><br>${esc(WN[v.k])}: ${f1(v.v)}%`;
+  if (k === "rdi") return `<b>${esc(c.n)}</b><br>Diversity ${f1(v)} of 10 · ${esc(c.d[1])}`;
+  return `<b>${esc(c.n)}</b><br>${esc(WN[k])}: ${S.mode === "change" ? (v >= 0 ? "+" : "") + f1(v) + " points" : f1(v) + "%"}`;
+}
+
+/* ---------- UK layers: councils (embedded data, geometry loaded) and neighbourhoods ---------- */
+let UKLA = null, UKMS = null, laLayer = null, laSN = null, laLines = null, msLayer = null, ukLoading = null, msLoading = null;
+const LAD = SITE.la;
+function uVal(T, v, o) {
+  const k = S.urel;
+  if (k === "largest") { const [b, x] = largestKey(v, UK); return b ? { k: b, v: 100 * x / T } : null; }
+  const i = UK.indexOf(k); if (v[i] == null) return null;
+  if (S.mode === "change") { if (!o) return null; return 100 * v[i] / T - 100 * o[i + 1] / o[0]; }
+  return 100 * v[i] / T;
+}
+function uFill(T, v, o) {
+  const x = uVal(T, v, o); if (x == null) return null; const k = S.urel;
+  if (k === "largest") return largestCol(x.k, x.v);
+  return S.mode === "change" ? divCol(x, k) : seqCol(x, k);
+}
+function uStyleBase(fill, sel) { return { color: sel ? css("--fg") : (isDark() ? "#5c5a66" : "#ffffff"), weight: sel ? 2.4 : (LY.borders ? .5 : 0), fillColor: fill || css("--land"), fillOpacity: LY.fill ? (fill ? .9 : .35) * LY.colour / 100 : 0, opacity: 1 }; }
+function laStyle(f) { const c = f.properties.c, d = LAD[c]; return uStyleBase(uFill(d.T, d.v, d.o), S.sel === c); }
+const lineStyle = () => ({ opacity: LY.borders ? .9 : 0, color: isDark() ? "#9a98a8" : "#59566a", weight: 1, fill: false });
+function msStyle(f) { const p = f.properties; return uStyleBase(uFill(p.T, p.v, null), S.sel === p.c); }
+function loadUK() {
+  if (!ukLoading) ukLoading = fetch("data/uk_la.json").then(r => r.json()).then(j => {
+    UKLA = j;
+    const each = (f, l) => {
+      f.properties._l = l;
+      l.on("click", e => { L.DomEvent.stopPropagation(e); pickLA(f.properties.c, false, e.latlng); });
+      l.on("mousemove", e => { const r = map.getContainer().getBoundingClientRect(); const d = LAD[f.properties.c]; showTip(uTip(d.n, d.T, d.v, d.o), r.left + e.containerPoint.x, r.top + e.containerPoint.y); });
+      l.on("mouseout", hideTip); };
+    const ew = f => "EW".includes(f.properties.c[0]);
+    laSN = L.geoJSON(j, { renderer: rend, style: laStyle, filter: f => !ew(f), onEachFeature: each });
+    laLines = L.geoJSON(j, { renderer: rend, style: lineStyle, filter: ew, interactive: false });
+    laLayer = L.geoJSON(j, { renderer: rend, style: laStyle, onEachFeature: each });
+    return j; });
+  return ukLoading;
+}
+function loadMS() {
+  if (!msLoading) msLoading = fetch("data/uk_msoa.json").then(r => r.json()).then(j => {
+    UKMS = j; msLayer = L.geoJSON(j, { renderer: rend, style: msStyle, onEachFeature: (f, l) => {
+      f.properties._l = l;
+      l.on("click", e => { L.DomEvent.stopPropagation(e); pickMS(f.properties.c, false, e.latlng); });
+      l.on("mousemove", e => { const r = map.getContainer().getBoundingClientRect(); const p = f.properties; showTip(uTip(p.n, p.T, p.v, null), r.left + e.containerPoint.x, r.top + e.containerPoint.y); });
+      l.on("mouseout", hideTip); } });
+    return j; });
+  return msLoading;
+}
+function uTip(n, T, v, o) {
+  const k = S.urel, x = uVal(T, v, o);
+  if (x == null) return `<b>${esc(n)}</b><br>${S.mode === "change" ? "No 2011 comparison" : "Not published separately"}`;
+  if (k === "largest") return `<b>${esc(n)}</b><br>${esc(UN[x.k])}: ${f1(x.v)}%`;
+  return `<b>${esc(n)}</b><br>${esc(UN[k])}: ${S.mode === "change" ? (x >= 0 ? "+" : "") + f1(x) + " points since 2011" : f1(x) + "%"}`;
+}
+
+/* ---------- OpenStreetMap places of worship: a canvas grid layer ---------- */
+let OSM = null, osmLayer = null, osmLoading = null; const OSMI = {};
+const DENC = { catholic: "#C0392B", orthodox: "#D4A21A", anglican: "#3B5BA9", lutheran: "#2E8B9A", reformed: "#6E6A86", baptist: "#2E8B57", methodist: "#B07AA1", pentecostal: "#E3672B", evangelical: "#8E2A4A", adventist: "#7A8B3A", lds: "#5D4037", jw: "#3F9FD6", protestant: "#9E9E9E", otherchr: "#BDB6AA" };
+const OCOL = { all: "#1F1D2B", christian: COL.christian, muslim: COL.muslim, buddhist: COL.buddhist, hindu: COL.hindu, shinto: "#C0392B", jewish: COL.jewish, sikh: COL.sikh, taoist: "#5D7A3A" };
+function loadOSM() {
+  if (OSM) { if (!map.hasLayer(osmLayer)) osmLayer.addTo(map); return; }
+  if (osmLoading) return; note("Loading places of worship...");
+  osmLoading = fetch("data/osm_cells.json").then(r => r.json()).then(j => {
+    OSM = j; j.rows.forEach(r => { (OSMI[r[0]] = OSMI[r[0]] || []).push(r); }); note("");
+    const G = L.GridLayer.extend({ createTile(c) {
+      const t = document.createElement("canvas"), sz = this.getTileSize(); t.width = sz.x; t.height = sz.y; const ctx = t.getContext("2d");
+      const nw = map.unproject(c.scaleBy(sz), c.z), se = map.unproject(c.add([1, 1]).scaleBy(sz), c.z);
+      const y0 = Math.floor(se.lat * 4) - 1, y1 = Math.floor(nw.lat * 4) + 1, x0 = Math.floor(nw.lng * 4) - 1, x1 = Math.floor(se.lng * 4) + 1;
+      const ri = LY.osmRel === "den" ? -1 : LY.osmRel === "all" ? -2 : OSM.rg.indexOf(LY.osmRel);
+      const org = c.scaleBy(sz), lm = Math.log(LY.osmRel === "all" ? 400 : 120);
+      for (let y = y0; y <= y1; y++) { const row = OSMI[y]; if (!row) continue;
+        for (const r of row) { if (r[1] < x0 || r[1] > x1) continue;
+          let n, colr;
+          if (ri === -1) { if (r[13] < 0) continue; n = r[3]; colr = DENC[OSM.den[r[13]][0]]; }
+          else if (ri === -2) { n = r[2]; colr = OCOL.all; } else { n = r[3 + ri]; colr = OCOL[LY.osmRel]; }
+          if (!n) continue;
+          const p0 = map.project([(r[0] + 1) / 4, r[1] / 4], c.z).subtract(org), p1 = map.project([r[0] / 4, (r[1] + 1) / 4], c.z).subtract(org);
+          const a = ri === -1 ? .3 + .6 * Math.min(1, Math.log(1 + n) / lm) : .12 + .85 * Math.min(1, Math.log(1 + n) / lm);
+          ctx.globalAlpha = a; ctx.fillStyle = (isDark() && ri === -2) ? "#f2eee6" : colr;
+          ctx.fillRect(Math.floor(p0.x), Math.floor(p0.y), Math.max(1, Math.ceil(p1.x - p0.x)), Math.max(1, Math.ceil(p1.y - p0.y)));
+        } }
+      return t; } });
+    osmLayer = new G({ pane: "osm", updateWhenZooming: false, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL)' });
+    if (LY.osm) osmLayer.addTo(map); legend();
+  });
+}
+function osmCell(ll) { if (!OSM || !LY.osm) return null; const y = Math.floor(ll.lat * 4), x = Math.floor(ll.lng * 4); return (OSMI[y] || []).find(r => r[1] === x) || null; }
+function osmCellHtml(ll) {
+  const r = osmCell(ll); if (!r) return LY.osm && OSM ? `<div class="sub" style="margin-top:6px;color:var(--muted)">No places of worship mapped in this square.</div>` : "";
+  const parts = OSM.rg.map((g, i) => [g, r[3 + i]]).filter(x => x[1] > 0 && x[0] !== "untagged").sort((a, b) => b[1] - a[1]).slice(0, 4).map(([g, n]) => `${g === "other" ? "other" : g} ${fmt(n)}`).join(", ");
+  return `<div style="margin-top:6px;border-top:1px solid var(--rule);padding-top:5px"><b>${fmt(r[2])}</b> places of worship mapped in this square${parts ? ": " + esc(parts) : ""}${r[13] >= 0 ? `. Most tagged Christian denomination: ${esc(OSM.den[r[13]][1])}` : ""}.</div>`;
+}
+
+/* ---------- restyle, views ---------- */
+function restyle() {
+  if (S.view === "world") wLayer.setStyle(wStyle);
+  else { [laLayer, laSN].forEach(l => { if (l && map.hasLayer(l)) l.setStyle(laStyle); }); if (laLines && map.hasLayer(laLines)) laLines.setStyle(lineStyle); if (msLayer && map.hasLayer(msLayer)) msLayer.setStyle(msStyle); }
+}
+function showLayers() {
+  if (S.view === "world") {
+    [laLayer, laSN, laLines, msLayer].forEach(l => { if (l) map.removeLayer(l); }); wLayer.addTo(map); restyle(); return Promise.resolve();
+  }
+  map.removeLayer(wLayer);
+  const needMS = S.geo === "msoa" && S.mode !== "change";
+  return loadUK().then(() => needMS ? loadMS() : null).then(() => {
+    if (needMS) { map.removeLayer(laLayer); msLayer.addTo(map); laSN.addTo(map); laLines.addTo(map); }
+    else { [msLayer, laSN, laLines].forEach(l => { if (l) map.removeLayer(l); }); laLayer.addTo(map); }
+    restyle();
+  });
+}
+function legend() {
+  const e = document.getElementById("legend"); let h = ""; const k = rel();
+  if (k === "largest") { const keys = S.view === "world" ? WK : UK.filter(x => x !== "notstated");
+    h = keys.map(x => `<span><i style="background:${largestCol(x, 60)}"></i>${esc(S.view === "world" ? WN[x] : UN[x])}</span>`).join("") + `<span style="flex-basis:100%;height:0"></span><span>Darker: a majority. Lighter: the largest group, but under half.</span>`; }
+  else if (k === "rdi") h = [0, 2, 4, 6, 8].map(v => `<span><i style="background:${rdiCol(v + 1)}"></i>${v} to ${v + 2}</span>`).join("") + `<span>Pew diversity index (0 to 10)</span>`;
+  else if (S.mode === "change") { const lab = ["under -15", "-15 to -10", "-10 to -5", "-5 to -2", "-2 to -0.5", "about the same", "0.5 to 2", "2 to 5", "5 to 10", "10 to 15", "over 15"];
+    h = lab.map((l, i) => { const v = i === 0 ? -20 : i === 10 ? 20 : i === 5 ? 0 : (CBINS[i - 1] + CBINS[i]) / 2; return `<span><i style="background:${divCol(v, k)}"></i>${l}</span>`; }).join("") + `<span>percentage points</span>`; }
+  else { const b = binsFor(k); h = [`<span><i style="background:${seqCol(b[0] / 2, k)}"></i>under ${b[0]}%</span>`].concat(b.map((x, i) => `<span><i style="background:${seqCol(x, k)}"></i>${i < b.length - 1 ? x + " to " + b[i + 1] + "%" : x + "% and over"}</span>`)).join(""); }
+  if (LY.osm) {
+    h += `<span style="flex-basis:100%;height:0"></span><span class="t">Places of worship per square:</span>`;
+    if (LY.osmRel === "den") h += Object.entries(DENC).map(([d, c]) => `<span><i style="background:${c}"></i>${esc((OSM ? OSM.den.find(x => x[0] === d) : [d, d])[1])}</span>`).join("");
+    else h += `<span><i style="background:${OCOL[LY.osmRel]};opacity:.25"></i>a few</span><span><i style="background:${OCOL[LY.osmRel]}"></i>many</span>`;
+  }
+  e.innerHTML = h;
+  const src = S.view === "world" ? "World: Pew Research Center, Religious Composition 2010 to 2020 (estimates; Pew is not responsible for this analysis). Outlines: Natural Earth." :
+    "UK: censuses of England and Wales 2021 and 2011 (ONS), Scotland 2022 (NRS), Northern Ireland 2021 (NISRA), Open Government Licence. Neighbourhoods are MSOAs in England and Wales; Scotland and Northern Ireland are shown by council. Change since 2011 is for England and Wales councils only.";
+  document.getElementById("mapsrc").textContent = src + (LY.osm ? " Places of worship: OpenStreetMap contributors (ODbL), counted per quarter degree square; mapping is very uneven between countries." : "") + " Base map tiles © Esri.";
+}
+function note(h) { const n = document.getElementById("mapnote"); if (n) n.innerHTML = h || ""; }
+
+/* ---------- side panel and popups ---------- */
+function barsTable(keys, names, now, before, unitNow, unitBefore, labBefore) {
+  const max = Math.max(...now.filter(v => v != null), ...(before || []).filter(v => v != null), 1);
+  return `<table>` + keys.map((k, i) => now[i] == null ? "" : `<tr><td><span class="sw" style="background:${COL[k]}"></span>${esc(names[k])}</td><td class="bar"><span class="bb" style="width:${100 * now[i] / max}%;background:${COL[k]}"></span>${before && before[i] != null ? `<span class="bb o" style="width:${100 * before[i] / max}%;background:${COL[k]}"></span>` : ""}</td><td class="num">${f1(now[i])}%${before && before[i] != null ? `<br><small style="color:var(--muted)">${f1(before[i])}%</small>` : ""}</td></tr>`).join("") + `</table>` + (before ? `<p class="sub">Thick bar ${unitNow}; thin bar and grey figure ${unitBefore}.</p>` : "");
+}
+function popRows(keys, names, sh) {
+  const top = keys.map((k, i) => [k, sh[i]]).filter(x => x[1] != null).sort((a, b) => b[1] - a[1]).slice(0, 4);
+  return top.map(([k, v]) => `<div class="pr"><span>${esc(names[k])}</span><i style="width:${Math.max(2, v * .9)}px;background:${COL[k]}"></i>${f1(v)}%</div>`).join("");
+}
+let popup = null;
+function openPop(ll, h) { if (!ll) return; popup = L.popup({ maxWidth: 280, autoPanPadding: [20, 20] }).setLatLng(ll).setContent(h + osmCellHtml(ll)).openOn(map); }
+function noData(name, ll) { openPop(ll, `<b class="t">${esc(name)}</b>No Pew estimate for this territory.`); }
+function side() {
+  const box = document.getElementById("side"); let h = "";
+  if (S.view === "world" && S.sel && SITE.c[S.sel]) {
+    const c = SITE.c[S.sel], [lk, lv] = largestKey(c.b, WK);
+    h = `<h4>${esc(c.r)}</h4><div class="big">${esc(c.n)}</div><p class="sub">Population ${fmt(c.p[1])} (2020). Largest group: ${esc(WN[lk])}${lv > 50 ? ", a majority" : ""}.</p>`;
+    h += `<h4>Religious make-up, 2020 and 2010</h4>` + barsTable(WK, WN, c.b, c.a, "2020", "2010");
+    h += `<h4>Estimated number, 2020</h4><table>` + WK.map((k, i) => `<tr><td>${esc(WN[k])}</td><td class="num">${typeof c.k[i] === "number" ? fmt(c.k[i]) : esc(c.k[i])}</td></tr>`).join("") + `</table>`;
+    if (c.d[0] != null) h += `<h4>Diversity</h4><p>${f1(c.d[0])} of 10 (${esc(c.d[1]).toLowerCase()}), ranked ${fmt(c.d[2])} of ${fmt(R.world.n_countries)}.</p>`;
+    const isos = Object.keys(SITE.iso2pew).filter(i => SITE.iso2pew[i] === S.sel); const o = isos.map(i => SITE.osmc[i]).filter(Boolean);
+    if (o.length) { const r = {}, d = {}; o.forEach(x => { Object.entries(x.r).forEach(([k, n]) => r[k] = (r[k] || 0) + n); Object.entries(x.d).forEach(([k, n]) => d[k] = (d[k] || 0) + n); });
+      const tot = Object.values(r).reduce((a, b) => a + b, 0);
+      h += `<h4>Places of worship in OpenStreetMap</h4><p>${fmt(tot)} mapped: ` + Object.entries(r).filter(x => x[0] !== "untagged" && x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([k, n]) => `${esc(k)} ${fmt(n)}`).join(", ") + (r.untagged ? `, no religion tag ${fmt(r.untagged)}` : "") + `.</p>`;
+      const dd = Object.entries(d).filter(x => x[0] !== "untagged").sort((a, b) => b[1] - a[1]).slice(0, 4);
+      if (dd.length) h += `<p class="sub">Most tagged Christian denominations: ${dd.map(([k, n]) => esc(SITE.den.find(x => x[0] === k)[1]) + " " + fmt(n)).join(", ")}.</p>`; }
+    h += `<p class="sub">Pew Research Center estimates. Pew is not responsible for this analysis.</p>`;
+  } else if (S.view === "uk" && S.sel) {
+    const m = S.sel.startsWith("E02") || S.sel.startsWith("W02");
+    if (m) { const f = UKMS && UKMS.features.find(x => x.properties.c === S.sel); if (f) { const p = f.properties, la = LAD[p.l];
+      h = `<h4>Neighbourhood (MSOA), census 2021</h4><div class="big">${esc(p.n)}</div><p class="sub">${fmt(p.T)} usual residents · in <span class="go" data-la="${p.l}">${esc(la ? la.n : "")}</span></p>` + barsTable(UK, UN, p.v.map(v => v == null ? null : 100 * v / p.T), la ? la.v.map(v => v == null ? null : 100 * v / la.T) : null, "this neighbourhood", "whole council"); } }
+    else { const d = LAD[S.sel]; const nat = { E: "England", W: "Wales", S: "Scotland", N: "Northern Ireland" }[d.t];
+      h = `<h4>${esc(nat)} · census ${d.y}</h4><div class="big">${esc(d.n)}</div><p class="sub">${fmt(d.T)} usual residents</p>`;
+      h += barsTable(UK, UN, d.v.map(v => v == null ? null : 100 * v / d.T), d.o ? UK.map((k, i) => 100 * d.o[i + 1] / d.o[0]) : null, "2021", "2011");
+      if (d.x) h += `<h4>${d.t === "S" ? "Christian and other answers" : "Christian denominations"}</h4><table>` + Object.entries(d.x).map(([k, n]) => `<tr><td>${esc(k)}</td><td class="num">${f1(100 * n / d.T)}%</td></tr>`).join("") + `</table>`;
+      if (d.bu) h += `<h4>Religion or religion brought up in</h4><table>` + [["cath", "Catholic"], ["prot", "Protestant and other Christian"], ["other", "Other religions"], ["none", "None"]].map(([k, n]) => `<tr><td>${n}</td><td class="num">${f1(100 * d.bu[k] / d.bu.total)}%</td></tr>`).join("") + `</table>`;
+      if (d.t === "N") h += `<p class="sub">Northern Ireland's tables give non-Christian religions together as other religion.</p>`;
+      if (d.t === "S") h += `<p class="sub">Scotland's census was in 2022. Other religion includes Pagan.</p>`; }
+  } else if (S.view === "world") {
+    h = `<h4>The world, 2020</h4><div class="big">Pick a country</div><p>Countries are shaded by ${S.wrel === "largest" ? "their largest religious group" : S.wrel === "rdi" ? "Pew's diversity index" : "the share of " + esc(WN[S.wrel]).toLowerCase() + (S.mode === "change" ? ", change from 2010 to 2020" : " in 2020")}. Click one for its full make-up in 2010 and 2020.</p>` + barsTable(WK, WN, WK.map(k => R.world.groups[k].pct2020), WK.map(k => R.world.groups[k].pct2010), "2020", "2010");
+  } else {
+    h = `<h4>The UK, censuses of 2021 and 2022</h4><div class="big">Pick an area</div><p>England and Wales are shown by neighbourhood (MSOA) or by council; Scotland and Northern Ireland by council. Click any area for its full answers.</p><h4>England and Wales</h4>` + barsTable(UK, UN, UK.map(k => R.uk.ew2021[k]), UK.map(k => R.uk.ew2011[k]), "2021", "2011");
+  }
+  box.innerHTML = h;
+  box.querySelectorAll("[data-la]").forEach(e => e.onclick = () => pickLA(e.dataset.la, true));
+}
+function toMap() { if (small()) document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" }); }
+const FIT = { 840: [[24, -125], [50, -66]], 250: [[41.3, -5.2], [51.2, 9.6]], 643: [[41, 27], [70, 140]], 578: [[57.9, 4.5], [71.2, 31]], 156: [[18, 73], [53.6, 135]], 554: [[-47.5, 166], [-34, 179]], 152: [[-56, -76], [-17.5, -66]], 826: [[49.9, -8.2], [58.7, 1.8]], 124: [[42, -140], [70, -52]] };
+function fitCountry(code) { const isos = Object.keys(SITE.iso2pew).filter(i => SITE.iso2pew[i] === code); const fs = WORLD.features.filter(f => isos.includes(f.properties.iso)); if (!fs.length) return; map.fitBounds(FIT[code] || L.geoJSON({ type: "FeatureCollection", features: fs }).getBounds(), { padding: [10, 10], maxZoom: 7 }); }
+function centreOf(code) { const iso = Object.keys(SITE.iso2pew).find(i => SITE.iso2pew[i] === code); const g = SITE.cpos[iso]; return g ? L.latLng(g[1], g[0]) : null; }
+function pickCountry(code, move, ll) {
+  if (S.view !== "world") setView("world");
+  S.sel = code; if (move) { fitCountry(code); toMap(); } restyle(); side();
+  const c = SITE.c[code]; const k = S.wrel;
+  let h = `<b class="t">${esc(c.n)}</b>`;
+  if (k === "rdi") h += `Diversity ${f1(c.d[0])} of 10 (${esc(c.d[1]).toLowerCase()})<br>`;
+  else if (k !== "largest" && S.mode === "change") { const i = WK.indexOf(k); h += `${esc(WN[k])}: ${f1(c.a[i])}% in 2010, ${f1(c.b[i])}% in 2020<br>`; }
+  h += popRows(WK, WN, c.b) + `<div style="color:var(--muted);margin-top:4px">2020 · Pew Research Center estimates</div>`;
+  setTimeout(() => openPop(ll || centreOf(code), h), move ? 450 : 0);
+  note(`<b>${esc(c.n)}</b>`);
+}
+function pickLA(code, move, ll) {
+  const go = () => { S.sel = code; const d = LAD[code]; const f = UKLA.features.find(x => x.properties.c === code);
+    if (move && f) { map.fitBounds(f.properties._l.getBounds(), { padding: [20, 20], maxZoom: 10 }); toMap(); }
+    restyle(); side();
+    let h = `<b class="t">${esc(d.n)}</b>`;
+    if (S.mode === "change" && d.o && S.urel !== "largest") { const i = UK.indexOf(S.urel); h += `${esc(UN[S.urel])}: ${f1(100 * d.o[i + 1] / d.o[0])}% in 2011, ${f1(100 * d.v[i] / d.T)}% in 2021<br>`; }
+    h += popRows(UK, UN, d.v.map(v => v == null ? null : 100 * v / d.T)) + `<div style="color:var(--muted);margin-top:4px">Census ${d.y}</div>`;
+    setTimeout(() => openPop(ll || (f ? f.properties._l.getBounds().getCenter() : null), h), move ? 450 : 0); note(`<b>${esc(d.n)}</b>`); };
+  if (S.view !== "uk") setView("uk").then(go); else loadUK().then(go);
+}
+function pickMS(code, move, ll) {
+  const go = () => { const f = UKMS.features.find(x => x.properties.c === code); if (!f) return; S.sel = code; const p = f.properties;
+    if (move) { map.fitBounds(p._l.getBounds(), { padding: [30, 30], maxZoom: 12 }); toMap(); }
+    restyle(); side();
+    const h = `<b class="t">${esc(p.n)}</b>` + popRows(UK, UN, p.v.map(v => 100 * v / p.T)) + `<div style="color:var(--muted);margin-top:4px">Neighbourhood in ${esc(LAD[p.l] ? LAD[p.l].n : "")} · census 2021</div>`;
+    setTimeout(() => openPop(ll || p._l.getBounds().getCenter(), h), move ? 450 : 0); note(`<b>${esc(p.n)}</b>`); };
+  const prep = () => { if (S.geo !== "msoa" || S.mode === "change") { S.geo = "msoa"; S.mode = "share"; syncButtons(); return showLayers(); } return Promise.resolve(); };
+  if (S.view !== "uk") setView("uk").then(prep).then(go); else prep().then(go);
+}
+
+/* ---------- controls ---------- */
+function syncButtons() {
+  document.querySelectorAll("#viewRow .btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === S.view));
+  document.querySelectorAll("#measRow .btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.m === S.mode));
+  document.querySelectorAll("#geoRow .btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.g === (S.mode === "change" ? "la" : S.geo)));
+  document.getElementById("geoRow").hidden = S.view !== "uk";
+  const cb = document.getElementById("chgBtn"); cb.textContent = S.view === "world" ? "Change 2010 to 2020" : "Change 2011 to 2021";
+  cb.disabled = rel() === "largest" || rel() === "rdi";
+  const row = document.getElementById("relTabs"); row.querySelectorAll(".btn").forEach(b => b.remove());
+  (S.view === "world" ? WREL : UREL).forEach(([k, l, c]) => { const b = document.createElement("button"); b.className = "btn"; b.dataset.r = k; b.style.setProperty("--tab", c); b.innerHTML = `<span class="dot" style="background:${c}"></span>${esc(l)}`; b.setAttribute("aria-pressed", k === rel()); b.onclick = () => setRel(k); row.appendChild(b); });
+  focusRow();
+}
+function setView(v) {
+  if (S.view !== v) { S.sel = null; if (popup) map.closePopup(popup); }
+  S.view = v; if (rel() === "largest" || rel() === "rdi") S.mode = "share";
+  syncButtons();
+  if (v === "uk" && map.getZoom() < 5) map.fitBounds([[49.9, -8.2], [58.7, 1.8]]);
+  if (v === "world" && map.getZoom() > 6) map.setView([25, 12], small() ? 1 : 2);
+  const p = showLayers(); legend(); side(); placeNames(); return p;
+}
+function setRel(k) { if (S.view === "world") S.wrel = k; else S.urel = k; if (k === "largest" || k === "rdi") S.mode = "share"; syncButtons(); showLayers(); legend(); side(); }
+function setMode(m) { if (m === "change" && (rel() === "largest" || rel() === "rdi")) return; S.mode = m; if (S.view === "uk" && m === "change" && S.sel && S.sel[2] === "2") S.sel = null; syncButtons(); showLayers(); legend(); side();
+  note(S.view === "uk" && m === "change" ? "Change since 2011: England and Wales councils only" : ""); }
+document.querySelectorAll("#viewRow .btn").forEach(b => b.onclick = () => setView(b.dataset.v));
+document.querySelectorAll("#measRow .btn").forEach(b => b.onclick = () => setMode(b.dataset.m));
+document.querySelectorAll("#geoRow .btn").forEach(b => b.onclick = () => { S.geo = b.dataset.g; if (S.geo === "msoa" && S.mode === "change") S.mode = "share"; if (S.sel && S.sel[2] === "2" && S.geo === "la") S.sel = null; syncButtons(); showLayers(); legend(); side(); });
+const ZW = [["World", [[-50, -150], [70, 170]]], ["Europe", [[35, -12], [66, 40]]], ["Africa", [[-35, -20], [37, 52]]], ["Middle East", [[12, 25], [42, 63]]], ["South Asia", [[5, 60], [36, 97]]], ["East Asia", [[18, 95], [50, 146]]], ["Americas", [[-55, -130], [60, -35]]], ["Oceania", [[-48, 110], [0, 180]]]];
+const ZU = [["UK", [[49.9, -8.2], [58.7, 1.8]]], ["London", [[51.28, -0.52], [51.7, 0.33]]], ["Birmingham", [[52.33, -2.1], [52.62, -1.7]]], ["Manchester", [[53.33, -2.5], [53.62, -2.05]]], ["Leicester", [[52.56, -1.23], [52.7, -1.05]]], ["Bradford", [[53.72, -1.9], [53.87, -1.65]]], ["Cardiff", [[51.42, -3.3], [51.56, -3.08]]], ["Glasgow", [[55.78, -4.45], [55.93, -4.05]]], ["Edinburgh", [[55.87, -3.35], [56.0, -3.05]]], ["Belfast", [[54.52, -6.08], [54.67, -5.8]]], ["Northern Ireland", [[54.0, -8.2], [55.35, -5.4]]]];
+function focusRow() {
+  const row = document.getElementById("focusRow"); row.querySelectorAll(".btn").forEach(b => b.remove());
+  (S.view === "world" ? ZW : ZU).forEach(([n, b]) => { const e = document.createElement("button"); e.className = "btn"; e.textContent = n; e.onclick = () => { map.fitBounds(b); toMap(); }; row.appendChild(e); });
+}
+const ZOOMTO = { europe: ["world", [[35, -12], [66, 40]]], usa: ["world", [[24, -125], [50, -66]]], japan: ["world", [[30, 129], [45.5, 146]]], ni: ["uk", [[54.0, -8.2], [55.35, -5.4]]] };
+document.querySelectorAll("[data-world],[data-uk],[data-osm]").forEach(b => b.onclick = e => {
+  e.preventDefault(); document.getElementById("atlas").scrollIntoView({ behavior: "smooth" });
+  if (b.dataset.osm) { LY.osm = true; LY.osmRel = b.dataset.osm; window.syncLayers(); applyLayers(); if (osmLayer) osmLayer.redraw(); }
+  const zt = ZOOMTO[b.dataset.zoomto];
+  const v = b.dataset.world ? "world" : b.dataset.uk ? "uk" : (zt ? zt[0] : S.view);
+  setView(v).then(() => { if (b.dataset.world) setRel(b.dataset.world); if (b.dataset.uk) setRel(b.dataset.uk); if (b.dataset.mode) setMode(b.dataset.mode);
+    setTimeout(() => { if (zt) map.fitBounds(zt[1]); if (b.dataset.focus) pickCountry(b.dataset.focus, true); }, 350); });
+});
+
+/* ---------- search: countries, councils, neighbourhoods, towns ---------- */
+(function search() {
+  const inp = document.getElementById("q"), sug = document.getElementById("sug"); let opts = [], k = -1;
+  const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const C = Object.entries(SITE.c).map(([code, c]) => ({ t: "c", n: c.n, code })); const ne = WORLD.features.filter(f => SITE.iso2pew[f.properties.iso] && f.properties.name !== SITE.c[SITE.iso2pew[f.properties.iso]].n).map(f => ({ t: "c", n: f.properties.name, code: SITE.iso2pew[f.properties.iso] }));
+  const LAs = Object.entries(LAD).map(([code, d]) => ({ t: "l", n: d.n, code }));
+  function build(q) {
+    const nq = norm(q); if (nq.length < 2) return []; const out = [];
+    C.concat(ne).forEach(o => { const n = norm(o.n); if (n.includes(nq)) out.push({ ...o, s: n.startsWith(nq) ? 4 : 1.5 }); });
+    LAs.forEach(o => { const n = norm(o.n); if (n.includes(nq)) out.push({ ...o, s: n.startsWith(nq) ? 3.5 : 1.3 }); });
+    if (UKMS) { let m = 0; for (const f of UKMS.features) { const n = norm(f.properties.n); if (n.includes(nq)) { out.push({ t: "m", n: f.properties.n, code: f.properties.c, s: n.startsWith(nq) ? 1.1 : .6 }); if (++m > 40) break; } } }
+    CITIES.forEach(c => { const n = norm(c.name); if (n.startsWith(nq)) out.push({ t: "p", n: c.name, c, s: 2 + Math.min(c.pop, 1e7) / 1e7 }); });
+    const seen = new Set(); return out.sort((a, b) => b.s - a.s).filter(o => { const key = o.t + o.n + (o.code || ""); if (seen.has(key)) return false; seen.add(key); return true; }).slice(0, 12);
+  }
+  const lab = o => o.t === "c" ? `${esc(o.n)} <span>country</span>` : o.t === "l" ? `${esc(o.n)} <span>council, ${esc({ E: "England", W: "Wales", S: "Scotland", N: "Northern Ireland" }[LAD[o.code].t])}</span>` : o.t === "m" ? `${esc(o.n)} <span>neighbourhood</span>` : `${esc(o.n)} <span>place</span>`;
+  const show = () => { sug.innerHTML = opts.map((o, i) => `<li role="option" aria-selected="${i === k}" data-i="${i}">${lab(o)}</li>`).join(""); sug.style.display = opts.length ? "block" : "none"; };
+  const ukBox = L.latLngBounds([[49.8, -8.7], [60.9, 1.9]]);
+  const choose = o => { sug.style.display = "none"; inp.value = o.n; inp.blur();
+    if (o.t === "c") pickCountry(o.code, true); else if (o.t === "l") pickLA(o.code, true); else if (o.t === "m") pickMS(o.code, true);
+    else { const inUK = ukBox.contains([o.c.lat, o.c.lon]); setView(inUK ? "uk" : "world").then(() => { map.setView([o.c.lat, o.c.lon], inUK ? 11 : 7); toMap(); }); } };
+  inp.addEventListener("focus", () => loadMS());
+  inp.addEventListener("input", () => { opts = build(inp.value); k = -1; show(); });
+  inp.addEventListener("keydown", e => { if (e.key === "ArrowDown") { k = Math.min(opts.length - 1, k + 1); show(); e.preventDefault(); } else if (e.key === "ArrowUp") { k = Math.max(0, k - 1); show(); e.preventDefault(); } else if (e.key === "Enter" && opts.length) { choose(opts[Math.max(0, k)]); } else if (e.key === "Escape") { sug.style.display = "none"; } });
+  sug.addEventListener("click", e => { const li = e.target.closest("li"); if (li) choose(opts[+li.dataset.i]); });
+  document.addEventListener("click", e => { if (!e.target.closest(".searchbox")) sug.style.display = "none"; });
+})();
+map.on("zoomend moveend", placeNames);
+
+/* ---------- charts ---------- */
+function hbars(box, rows, opts) {
+  resp(box, (w, sm) => {
+    const maxLab = Math.max(...rows.map(r => String(r.lab ?? r.v).length)), lw = sm ? Math.min(150, w * .44) : Math.min(230, w * .42), rh = 26, h = rows.length * rh + 10, x0 = lw, x1 = w - 10 - maxLab * 7.4, max = opts.max || Math.max(...rows.map(r => r.v)) || 1;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": opts.aria }, box);
+    rows.forEach((r, i) => {
+      const y = 4 + i * rh, bw = Math.max(r.v > 0 ? 2 : 0, (x1 - x0) * r.v / max), cut = sm ? 19 : 30;
+      const t = lbl(svg, x0 - 8, y + 16, r.n.length > cut ? r.n.slice(0, cut - 1) + "." : r.n, "lab", "end");
+      const b = el("rect", { x: x0, y: y + 3, width: bw, height: rh - 9, fill: r.c, rx: 2 }, svg);
+      lbl(svg, x0 + bw + 6, y + 16, r.lab ?? fmt(r.v), "lab b");
+      if (r.tip) [b, t].forEach(e => tipOn(e, r.tip));
+    });
+  });
+}
+function pairs(box, rows, opts) { // rows: {n, a (before), b (after), c}
+  resp(box, (w, sm) => {
+    const lw = sm ? Math.min(140, w * .4) : Math.min(220, w * .38), rh = 34, h = rows.length * rh + 8, x0 = lw, x1 = w - 64, max = Math.max(...rows.map(r => Math.max(r.a, r.b))) || 1;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": opts.aria }, box);
+    rows.forEach((r, i) => { const y = 4 + i * rh, wa = (x1 - x0) * r.a / max, wb = (x1 - x0) * r.b / max;
+      const t = lbl(svg, x0 - 8, y + 17, r.n, "lab", "end");
+      const ra = el("rect", { x: x0, y: y + 3, width: Math.max(1, wa), height: 9, fill: r.c, opacity: .35, rx: 1.5 }, svg);
+      const rb = el("rect", { x: x0, y: y + 14, width: Math.max(1, wb), height: 13, fill: r.c, rx: 2 }, svg);
+      lbl(svg, x0 + Math.max(wa, wb) + 6, y + 18, f1(r.b) + "%", "lab b");
+      const th = `<b>${esc(r.n)}</b><br>${opts.ya}: ${f1(r.a)}%<br>${opts.yb}: ${f1(r.b)}%`; [t, ra, rb].forEach(e => tipOn(e, th)); });
+  });
+}
+function divbars(box, rows, opts) { // rows: {n, v (pp), c, tip}
+  resp(box, (w, sm) => {
+    const lw = sm ? Math.min(130, w * .38) : Math.min(200, w * .34), rh = 26, h = rows.length * rh + 8, x0 = lw, x1 = w - 56, max = Math.max(...rows.map(r => Math.abs(r.v))) || 1;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": opts.aria }, box);
+    rows.forEach((r, i) => { const y = 4 + i * rh, bw = (x1 - x0) * Math.abs(r.v) / max;
+      const t = lbl(svg, x0 - 8, y + 16, r.n, "lab", "end"); const b = el("rect", { x: x0, y: y + 4, width: Math.max(1, bw), height: rh - 10, fill: r.c, rx: 2 }, svg);
+      lbl(svg, x0 + bw + 6, y + 16, (r.v > 0 ? "+" : "") + f1(r.v), "lab b"); if (r.tip) [t, b].forEach(e => tipOn(e, r.tip)); });
+  });
+}
+function stacks(box, rows, keys, names, opts) { // rows: {n, v: {k: pct}}
+  resp(box, (w, sm) => {
+    const lw = sm ? 0 : 150, rh = sm ? 50 : 34, h = rows.length * rh + 40, x0 = lw, x1 = w - 4;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": opts.aria }, box);
+    rows.forEach((r, i) => { const y = 4 + i * rh; let x = x0;
+      lbl(svg, sm ? 0 : x0 - 8, sm ? y + 11 : y + 17, r.n, "lab b", sm ? "start" : "end");
+      const by = sm ? y + 16 : y + 4;
+      keys.forEach(k => { const v = r.v[k]; if (!v) return; const bw = (x1 - x0) * v / 100;
+        const rc = el("rect", { x, y: by, width: Math.max(.5, bw - .5), height: 22, fill: COL[k] }, svg);
+        if (bw > 34) { const t = lbl(svg, x + 4, by + 15, Math.round(v) + "%", "lab s"); t.style.fill = "#fff"; t.style.pointerEvents = "none"; }
+        tipOn(rc, `<b>${esc(r.n)}</b><br>${esc(names[k])}: ${f1(v)}%`); x += bw; }); });
+    let lx = 0, ly = h - 22; keys.forEach(k => { const t = (names[k] || k).length * 7 + 26; if (lx + t > w) { lx = 0; ly += 16; } el("rect", { x: lx, y: ly - 9, width: 10, height: 10, fill: COL[k], rx: 2 }, svg); lbl(svg, lx + 14, ly, names[k], "lab s m"); lx += t; });
+    svg.setAttribute("viewBox", `0 0 ${w} ${ly + 8}`);
+  });
+}
+function lines(box, series, xs, opts) { // series: {n, c, v:[...]}
+  resp(box, (w, sm) => {
+    const h = sm ? 260 : 320, l = 40, r = sm ? 12 : 120, t = 12, b = 30, xmin = Math.min(...xs), xmax = Math.max(...xs), ymax = opts.ymax || 100;
+    const X = x => l + (w - l - r) * (x - xmin) / (xmax - xmin), Y = y => t + (h - t - b) * (1 - y / ymax);
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h + (sm ? 20 * Math.ceil(series.length / 2) : 0)}`, role: "img", "aria-label": opts.aria }, box);
+    for (let g = 0; g <= ymax; g += opts.step || 10) { el("line", { x1: l, x2: w - r, y1: Y(g), y2: Y(g), stroke: "var(--rule)" }, svg); lbl(svg, l - 6, Y(g) + 4, g + "%", "lab s m", "end"); }
+    (opts.xt || xs).forEach(x => lbl(svg, X(x), h - 10, opts.xl ? opts.xl(x) : String(x), "lab s m", "middle"));
+    series.forEach((s, si) => { const pts = s.v.map((v, i) => v == null ? null : [X(xs[i]), Y(v)]).filter(Boolean);
+      el("path", { d: "M" + pts.map(p => p.join(" ")).join(" L"), fill: "none", stroke: s.c, "stroke-width": 2.6, "stroke-linejoin": "round", "stroke-dasharray": s.dash || "" }, svg);
+      s.v.forEach((v, i) => { if (v == null) return; const c = el("circle", { cx: X(xs[i]), cy: Y(v), r: 3.4, fill: s.c }, svg); tipOn(c, `<b>${esc(s.n)}</b><br>${opts.xl ? opts.xl(xs[i]) : xs[i]}: ${f1(v)}%`); });
+      if (!sm) { const p = pts[pts.length - 1]; lbl(svg, p[0] + 8, p[1] + 4 + (s.off || 0), s.n, "lab b").style.fill = s.c; }
+      else { const lx = (si % 2) * (w / 2), ly = h + 12 + 20 * Math.floor(si / 2); el("rect", { x: lx, y: ly - 9, width: 10, height: 10, fill: s.c, rx: 2 }, svg); lbl(svg, lx + 14, ly, s.n, "lab s"); } });
+  });
+}
+(function charts() {
+  const G = R.world.groups;
+  pairs(document.getElementById("globChart"), WK.map(k => ({ n: WN[k], a: G[k].pct2010, b: G[k].pct2020, c: COL[k] })), { aria: "World religious make-up 2010 and 2020", ya: "2010", yb: "2020" });
+  const RN = { "Sub-Saharan Africa": "Sub-Saharan Africa", "Europe": "Europe", "Latin America-Caribbean": "Latin America, Caribbean", "Asia-Pacific": "Asia-Pacific", "North America": "North America", "Middle East-North Africa": "Middle East, N. Africa" };
+  const rc = R.world.regions.christian;
+  pairs(document.getElementById("regChart"), Object.keys(rc).sort((a, b) => rc[b]["2020"] - rc[a]["2020"]).map(r => ({ n: RN[r], a: rc[r]["2010"], b: rc[r]["2020"], c: COL.christian })), { aria: "Share of the world's Christians by region", ya: "2010", yb: "2020" });
+  divbars(document.getElementById("noneChart"), R.world.top_change.none.rise.map(d => ({ n: d.name, v: d.pp, c: COL.none, tip: `<b>${esc(d.name)}</b><br>Unaffiliated ${f1(d.pct2010)}% in 2010, ${f1(d.pct2020)}% in 2020` })), { aria: "Largest rises in the unaffiliated share" });
+  stacks(document.getElementById("rdiChart"), R.world.rdi_top.map(d => { const code = Object.keys(SITE.c).find(c => SITE.c[c].n === d.name); const c = SITE.c[code]; const v = {}; WK.forEach((k, i) => v[k] = c.b[i]); return { n: `${d.name} ${f1(d.rdi)}`, v }; }), WK, WN, { aria: "Most diverse countries" });
+  const DN = Object.fromEntries(SITE.den); const regs = ["Europe", "North America", "Latin America-Caribbean", "Sub-Saharan Africa", "Asia-Pacific", "Middle East-North Africa"];
+  const dk = ["catholic", "orthodox", "anglican", "lutheran", "reformed", "baptist", "methodist", "pentecostal", "evangelical", "protestant", "otherchr"];
+  const DCOL = Object.assign({}, DENC); dk.forEach(k => COL["d_" + k] = DCOL[k]);
+  stacks(document.getElementById("denChart"), regs.map(r => ({ n: RN[r], v: denShares(r) })), dk.map(k => "d_" + k), Object.fromEntries(dk.map(k => ["d_" + k, DN[k]])), { aria: "Tagged Christian denominations by region" });
+  hbars(document.getElementById("densChart"), regs.map(r => ({ n: RN[r], v: R.osm.region[r].per100k, c: "#5B5670", lab: f1(R.osm.region[r].per100k) })).sort((a, b) => b.v - a.v), { aria: "Mapped places of worship per 100,000 people" });
+  const nat = [["England and Wales", R.uk.ew2021], ["Wales", R.uk.wal2021], ["Scotland", R.uk.scot], ["Northern Ireland", R.uk.ni]];
+  stacks(document.getElementById("nationChart"), nat.map(([n, s]) => ({ n, v: s })), UK, UN, { aria: "Religion in the UK nations" });
+  pairs(document.getElementById("ewChart"), UK.map(k => ({ n: UN[k], a: R.uk.ew2011[k], b: R.uk.ew2021[k], c: COL[k] })), { aria: "England and Wales 2011 and 2021", ya: "2011", yb: "2021" });
+  const A = R.uk.age["England and Wales"], bands = A.map(a => a.band);
+  lines(document.getElementById("ageChart"), [["christian", 0], ["none", 0], ["muslim", 0]].map(([k]) => ({ n: UN[k], c: COL[k], v: A.map(a => a[k]) })), bands.map((b, i) => i), { aria: "Religion by age", ymax: 80, xl: i => bands[i].replace("-", " to ").replace("75+", "75 and over") });
+  const H = R.uk.ni_hist, yrs = H.map(h => h.year);
+  lines(document.getElementById("niChart"), [{ n: "Catholic", c: "#9C5B2E", v: H.map(h => h.cath) }, { n: "Presbyterian, Church of Ireland, Methodist", c: "#3C7A89", v: H.map(h => h.prot3), off: -4 }, { n: "None or not stated", c: COL.none, v: H.map(h => h.none_ns) }, { n: "Other", c: "#B5A26A", v: H.map(h => h.other), off: 6 }], yrs, { aria: "Religion in Northern Ireland 1861 to 2021", ymax: 70, xt: [1861, 1881, 1901, 1926, 1951, 1971, 1991, 2021] });
+  function denShares(r) { const d = SITE.osmReg[r]; const t = dk.reduce((s, k) => s + (d[k] || 0), 0); const v = {}; dk.forEach(k => v["d_" + k] = 100 * (d[k] || 0) / t); return v; }
+  const box = document.getElementById("cards"); const T = R.uk.msoa.top;
+  [["muslim", T.muslim[0], "Birmingham"], ["hindu", T.hindu[0], "Leicester"], ["sikh", T.sikh[0], "Ealing"], ["jewish", T.jewish[0], "Salford"], ["buddhist", T.buddhist[0], "Rushmoor"], ["none", T.none[0], "Brighton and Hove"]].forEach(([k, t]) => {
+    const d = document.createElement("div"); d.className = "card"; d.style.setProperty("--c", COL[k]);
+    d.innerHTML = `<b>${esc(t.name)}</b><div class="big">${f1(t.pct)}% <span>${esc(UN[k].toLowerCase())}</span></div><div style="color:var(--muted)">Highest share of any neighbourhood in England and Wales</div><button class="btn">Show on the map</button>`;
+    d.querySelector("button").onclick = () => { document.getElementById("atlas").scrollIntoView({ behavior: "smooth" }); setView("uk").then(() => { S.urel = k; S.mode = "share"; S.geo = "msoa"; syncButtons(); return showLayers(); }).then(() => { legend(); const f = UKMS.features.find(x => x.properties.n === t.name); if (f) pickMS(f.properties.c, true); }); };
+    box.appendChild(d); });
+})();
+
+/* ---------- start ---------- */
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; setTiles(); legend(); redraws.forEach(f => f()); if (osmLayer) osmLayer.redraw(); };
+syncButtons(); setTiles(); showLayers(); legend(); side(); placeNames();
+</script>
+/*FULLSCREEN*/
+</body>
+</html>

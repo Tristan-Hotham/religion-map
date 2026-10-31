@@ -1,0 +1,170 @@
+<!-- wp:paragraph -->
+<p><em>Christianity's centre has moved to sub-Saharan Africa, the number of people with no religion is growing fast, and in Scotland no religion is now the majority answer. I mapped the world's religions and every neighbourhood in the UK, and found that the biggest divide at home is not between places but between generations.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/religion-map/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="{{DOI_URL}}">Read the paper</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph -->
+<p>Religion is one of the oldest ways people have of saying who they are, and one of the hardest things to count. A census can only ask; a survey can only sample; a map of churches and mosques only shows what someone has drawn. But put the best open sources side by side and a clear picture emerges.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For the world I used Pew Research Center's estimates of the religious make-up of {{world.n_countries|int}} countries and territories in 2010 and 2020. For the UK I put together the censuses of England and Wales (2011 and 2021), Scotland (2022) and Northern Ireland (2021, with a series going back to 1861). And for the buildings, I counted the {{osm.total|int}} places of worship that OpenStreetMap's volunteers have mapped.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_largest_map.png|World map colouring each country by its largest religious group in 2020: Christians in blue across the Americas, Europe, Russia, southern and central Africa and Australia, Muslims in green from West Africa through the Middle East and Central Asia to Indonesia, Hindus in orange in India and Nepal, Buddhists in maroon from Myanmar to Thailand and in Mongolia, and the religiously unaffiliated in violet in China, Japan, Korea, Uruguay and New Zealand|The largest religious group in each country and territory in 2020. Darker shades are majorities.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Four big answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In 2020, by Pew's estimates, {{world.groups.christian.pct2020|f1}}% of the world was Christian, {{world.groups.muslim.pct2020|f1}}% Muslim, {{world.groups.none.pct2020|f1}}% religiously unaffiliated and {{world.groups.hindu.pct2020|f1}}% Hindu, with Buddhists at {{world.groups.buddhist.pct2020|f1}}%, Jews at {{world.groups.jewish.pct2020|f1}}% and every other religion together at {{world.groups.other.pct2020|f1}}%. Christians are the largest group in {{world.largest2020.christian|int}} countries and territories and Muslims in {{world.largest2020.muslim|int}}. The unaffiliated are the largest group in {{world.largest2020.none|int}}, and they are concentrated to a remarkable degree: China alone is home to {{world.china_share_of_none|pc}} of them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Christianity moves south</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Between 2010 and 2020 the world's population grew by {{world.pop_growth_pct|f1}}%. The number of Muslims grew fastest, by {{world.groups.muslim.growth_pct|f1}}%, and the unaffiliated by {{world.groups.none.growth_pct|f1}}%. Christians grew by {{world.groups.christian.growth_pct|f1}}%, so their share of the world fell, and Buddhists were the only group to shrink in number.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The geography of Christianity changed too. In 2010 Europe had the largest share of the world's Christians, {{world.regions.christian.Europe.2010|f1}}%. By 2020 sub-Saharan Africa had overtaken it, with {{world.regions.christian.Sub-Saharan Africa.2020|f1}}% against Europe's {{world.regions.christian.Europe.2020|f1}}%.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_christ_regions.png|Bar chart of the share of the world's Christians in each region in 2010 and 2020: sub-Saharan Africa rises from 24.8 to 30.7 per cent, Latin America and the Caribbean slips from 24.7 to 24.1, Europe falls from 25.8 to 22.3, Asia-Pacific stays at 11.8, North America falls from 12.4 to 10.5 and the Middle East and North Africa is under 1 per cent|Where the world's Christians live: share in each region, 2010 (pale) and 2020 (solid).}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Meanwhile the share of people with no religion rose in {{world.none_up_n|int}} countries. The biggest jumps came in {{world.top_change.none.rise.0.name|raw}} ({{world.top_change.none.rise.0.pp|f1}} points), {{world.top_change.none.rise.1.name|raw}}, {{world.top_change.none.rise.2.name|raw}} and the {{world.top_change.none.rise.3.name|raw}}, and in Uruguay and New Zealand the unaffiliated became the largest group.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_none_change_map.png|World map of the change in the share of people with no religious affiliation between 2010 and 2020: deep violet rises across Australia, the United States, Canada, Chile, Uruguay and much of Europe, smaller rises in China, and falls in brown in several African countries including Mozambique, Ghana and Ivory Coast|Change in the share with no religious affiliation, 2010 to 2020.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A map of 1.6 million doors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>OpenStreetMap's volunteers have mapped {{osm.total|int}} places of worship: {{osm.by_rel.christian|int}} Christian, {{osm.by_rel.muslim|int}} Muslim, {{osm.by_rel.buddhist|int}} Buddhist, {{osm.by_rel.hindu|int}} Hindu and {{osm.by_rel.shinto|int}} Shinto shrines, almost all in Japan. Coloured by the most common religion in each small square, they draw the great religious landscapes of the world with startling clarity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_osm_map.png|World map of places of worship in OpenStreetMap, each small square coloured by its most common religion: dense blue Christian across Europe, the eastern United States and Brazil, green Muslim from West Africa and Turkey to Pakistan and Indonesia, orange Hindu across India and Nepal, maroon Buddhist in Myanmar, Thailand and China, red Shinto in Japan, and thin coverage across most of Africa|Places of worship in OpenStreetMap, coloured by the most common tagged religion in each quarter degree square.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>But the map is also a warning label. North America has {{osm.region.North America.per100k|f1}} mapped places of worship per 100,000 people; sub-Saharan Africa, where most of the world's Christian growth is happening, has {{osm.region.Sub-Saharan Africa.per100k|f1}}. That is a map of where volunteers draw buildings, not of where people pray.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The UK: no religion, nearly</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In England and Wales, Christian is still the largest single answer, {{uk.ew2021.christian|f1}}% against {{uk.ew2021.none|f1}}% for no religion, but it is no longer a majority: in 2011 it was {{uk.ew2011.christian|f1}}%. In Wales no religion is now the largest answer ({{uk.wal2021.none|f1}}%), and in Scotland it is a majority ({{uk.scot.none|f1}}%). Northern Ireland remains the most Christian part of the UK ({{uk.ni.christian|f1}}%). Council by council, no religion is the most common answer in {{uk.la.largest.none|int}} of the UK's {{uk.la.n|int}} local authorities; in 2011 it was the most common answer in none of the councils of England and Wales.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_uk_none_map.png|Map of the UK shaded by the share with no religion: darkest across Scotland, especially Fife, the Lothians and Shetland, and in south Wales, Brighton and parts of eastern England, with paler neighbourhoods in London, Birmingham, Leicester and the north west of England, and pale Northern Ireland|The share with no religion: England and Wales by neighbourhood, Scotland and Northern Ireland by council.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Zoom into the neighbourhoods and the picture is local. No religion peaks in central Brighton and Hove ({{uk.msoa.top.none.0.pct|pc}}), Christian in parts of Liverpool and Knowsley ({{uk.msoa.top.christian.0.pct|pc}}). Other faiths are concentrated in particular places: Muslims in parts of Birmingham and Blackburn, Hindus in Leicester, Sikhs in Ealing and Wolverhampton, Jewish communities in Salford and north London, Buddhists around Aldershot.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The young answer differently</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The sharpest divide in the census is age. Among people aged 75 and over in England and Wales, {{uk.age.England and Wales.6.christian|pc}} said they were Christian. Among 25 to 34 year olds, {{uk.age.England and Wales.2.none|pc}} said they had no religion. The two lines cross among people in their late thirties and forties.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_age.png|Line chart of religion by age in England and Wales in 2021: the Christian share rises from about 31 per cent among 16 to 34 year olds to 77 per cent among people aged 75 and over, the no religion share falls from 51 per cent among 25 to 34 year olds to 14 per cent among the oldest, crossing at 35 to 49, and the Muslim share falls from 11 per cent among under 16s to about 1 per cent|Christian, no religion and Muslim shares by age, England and Wales, 2021.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Among people aged 75 and over, {{uk.age.England and Wales.6.christian|pc}} said they were Christian. Among 25 to 34 year olds, {{uk.age.England and Wales.2.none|pc}} said they had no religion.</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Northern Ireland, 1861 to 2021</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Northern Ireland's statisticians publish religion from every census since 1861. In 1861, {{uk.ni_h.cath1861|f1}}% of people were Catholic and {{uk.ni_h.prot1861|f1}}% belonged to the three largest Protestant churches. The Protestant share peaked in {{uk.ni_h.prot_peak_year|raw}}; since {{uk.ni_h.cross_year|raw}} Catholics have outnumbered the three churches combined, and in 2021 the figures were {{uk.ni_h.cath2021|f1}}% and {{uk.ni_h.prot2021|f1}}%, while {{uk.ni_h.nons2021|f1}}% had no religion or did not say.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_ni_history.png|Line chart of religion in Northern Ireland at sixteen censuses from 1861 to 2021: the three largest Protestant churches rise from 58 per cent to a peak of 62 per cent in 1926 then fall to 30 per cent, the Catholic share dips to 28 per cent in 1981, a census with a campaign of non-cooperation, then rises to 42 per cent, crossing the Protestant line in 2001, and none or not stated rises from almost nothing to 19 per cent|Religion in Northern Ireland at every census from 1861 to 2021.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How I did this</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Everything was downloaded on {{meta.retrieved|raw}}. The world figures are Pew Research Center's published estimates, joined to country outlines. The four UK nations ask about religion in different words (Scotland lists the Church of Scotland and Roman Catholic separately; Northern Ireland also asks the religion you were brought up in), so I put the answers into common groups and say where they do not line up: Northern Ireland's tables, for example, do not separate the smaller faiths. To compare 2011 with 2021 I added up the councils that have merged since. The places of worship are counted per quarter degree square from OpenStreetMap's religion and denomination tags. The paper sets out every step and caveat.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Belonging is not the same as believing or practising, and none of these sources measures faith. This is a description of how people answer, not a judgement of any religion or of none.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/religion-map/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="{{DOI_URL}}">Read the paper</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://github.com/Tristan-Hotham/religion-map">Data and code</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Notes and sources</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Pew Research Center (2025), <a href="https://www.pewresearch.org/religion/">How the Global Religious Landscape Changed From 2010 to 2020</a>, dataset with diversity statistics (2026). Pew Research Center is not responsible for the analyses or interpretations presented here.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Office for National Statistics, Census 2021 and 2011, via <a href="https://www.nomisweb.co.uk/">Nomis</a>. Open Government Licence v3.0.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>National Records of Scotland, <a href="https://www.scotlandscensus.gov.uk/">Scotland's Census 2022</a>, table UV205. Open Government Licence v3.0.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Northern Ireland Statistics and Research Agency, <a href="https://www.nisra.gov.uk/statistics/census">Census 2021</a>, tables MS-B19, MS-B22 and MS-B23. Open Government Licence v3.0.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, via QLever. ODbL 1.0.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Boundaries: ONS (Open Government Licence v3.0, contains OS data © Crown copyright and database right) and <a href="https://www.naturalearthdata.com/">Natural Earth</a> (public domain).</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->

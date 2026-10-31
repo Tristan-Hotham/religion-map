@@ -1,0 +1,3768 @@
+{
+ "meta": {
+  "retrieved": "2026",
+  "page": "https://maps.tristanhotham.com/religion-map/",
+  "repo": "https://github.com/Tristan-Hotham/religion-map",
+  "doi": "{{DOI}}",
+  "blog": "https://blog.tristanhotham.com/2026/10/31/religion-map/"
+ },
+ "world": {
+  "n_countries": 201,
+  "pop2010": 7020590000.0,
+  "pop2020": 7885810000.0,
+  "pop_growth_pct": 12.3,
+  "groups": {
+   "christian": {
+    "pct2010": 30.6,
+    "pct2020": 28.8,
+    "cnt2010": 2147230000.0,
+    "cnt2020": 2268860000.0,
+    "bn2020": 2.27,
+    "m2020": 2269,
+    "growth_pct": 5.7,
+    "change_m": 122
+   },
+   "muslim": {
+    "pct2010": 23.9,
+    "pct2020": 25.6,
+    "cnt2010": 1675800000.0,
+    "cnt2020": 2022590000.0,
+    "bn2020": 2.02,
+    "m2020": 2023,
+    "growth_pct": 20.7,
+    "change_m": 347
+   },
+   "none": {
+    "pct2010": 23.3,
+    "pct2020": 24.2,
+    "cnt2010": 1635250000.0,
+    "cnt2020": 1905360000.0,
+    "bn2020": 1.91,
+    "m2020": 1905,
+    "growth_pct": 16.5,
+    "change_m": 270
+   },
+   "hindu": {
+    "pct2010": 15.0,
+    "pct2020": 14.9,
+    "cnt2010": 1051540000.0,
+    "cnt2020": 1177860000.0,
+    "bn2020": 1.18,
+    "m2020": 1178,
+    "growth_pct": 12.0,
+    "change_m": 126
+   },
+   "buddhist": {
+    "pct2010": 4.9,
+    "pct2020": 4.1,
+    "cnt2010": 342750000.0,
+    "cnt2020": 324190000.0,
+    "bn2020": 0.32,
+    "m2020": 324,
+    "growth_pct": -5.4,
+    "change_m": -19
+   },
+   "jewish": {
+    "pct2010": 0.2,
+    "pct2020": 0.2,
+    "cnt2010": 13910000.0,
+    "cnt2020": 14780000.0,
+    "bn2020": 0.01,
+    "m2020": 15,
+    "growth_pct": 6.3,
+    "change_m": 1
+   },
+   "other": {
+    "pct2010": 2.2,
+    "pct2020": 2.2,
+    "cnt2010": 154110000.0,
+    "cnt2020": 172170000.0,
+    "bn2020": 0.17,
+    "m2020": 172,
+    "growth_pct": 11.7,
+    "change_m": 18
+   }
+  },
+  "largest2010": {
+   "muslim": 54,
+   "christian": 125,
+   "buddhist": 8,
+   "none": 9,
+   "hindu": 3,
+   "jewish": 1,
+   "other": 1
+  },
+  "majority2010": {
+   "muslim": 53,
+   "christian": 124,
+   "buddhist": 7,
+   "none": 7,
+   "hindu": 2,
+   "jewish": 1,
+   "other": 1
+  },
+  "largest2020": {
+   "muslim": 54,
+   "christian": 123,
+   "buddhist": 8,
+   "none": 11,
+   "hindu": 3,
+   "jewish": 1,
+   "other": 1
+  },
+  "majority2020": {
+   "muslim": 53,
+   "christian": 120,
+   "buddhist": 7,
+   "none": 10,
+   "hindu": 2,
+   "jewish": 1,
+   "other": 1
+  },
+  "changed": [
+   {
+    "name": "New Zealand",
+    "from": "christian",
+    "to": "none",
+    "none": 51.4,
+    "christian": 40.3
+   },
+   {
+    "name": "Uruguay",
+    "from": "christian",
+    "to": "none",
+    "none": 52.4,
+    "christian": 44.5
+   }
+  ],
+  "regions": {
+   "christian": {
+    "Asia-Pacific": {
+     "2010": 11.8,
+     "2020": 11.8
+    },
+    "Europe": {
+     "2010": 25.8,
+     "2020": 22.3
+    },
+    "Latin America-Caribbean": {
+     "2010": 24.7,
+     "2020": 24.1
+    },
+    "Middle East-North Africa": {
+     "2010": 0.5,
+     "2020": 0.6
+    },
+    "North America": {
+     "2010": 12.4,
+     "2020": 10.5
+    },
+    "Sub-Saharan Africa": {
+     "2010": 24.8,
+     "2020": 30.7
+    }
+   },
+   "muslim": {
+    "Asia-Pacific": {
+     "2010": 61.0,
+     "2020": 58.7
+    },
+    "Europe": {
+     "2010": 2.3,
+     "2020": 2.3
+    },
+    "Latin America-Caribbean": {
+     "2010": 0.0,
+     "2020": 0.0
+    },
+    "Middle East-North Africa": {
+     "2010": 19.9,
+     "2020": 20.5
+    },
+    "North America": {
+     "2010": 0.2,
+     "2020": 0.3
+    },
+    "Sub-Saharan Africa": {
+     "2010": 16.4,
+     "2020": 18.2
+    }
+   },
+   "none": {
+    "Asia-Pacific": {
+     "2010": 83.4,
+     "2020": 78.3
+    },
+    "Europe": {
+     "2010": 8.5,
+     "2020": 10.0
+    },
+    "Latin America-Caribbean": {
+     "2010": 2.8,
+     "2020": 4.0
+    },
+    "Middle East-North Africa": {
+     "2010": 0.1,
+     "2020": 0.1
+    },
+    "North America": {
+     "2010": 3.6,
+     "2020": 6.0
+    },
+    "Sub-Saharan Africa": {
+     "2010": 1.6,
+     "2020": 1.5
+    }
+   },
+   "hindu": {
+    "Asia-Pacific": {
+     "2010": 99.2,
+     "2020": 99.1
+    },
+    "Europe": {
+     "2010": 0.2,
+     "2020": 0.2
+    },
+    "Latin America-Caribbean": {
+     "2010": 0.1,
+     "2020": 0.1
+    },
+    "Middle East-North Africa": {
+     "2010": 0.2,
+     "2020": 0.3
+    },
+    "North America": {
+     "2010": 0.2,
+     "2020": 0.3
+    },
+    "Sub-Saharan Africa": {
+     "2010": 0.1,
+     "2020": 0.1
+    }
+   },
+   "buddhist": {
+    "Asia-Pacific": {
+     "2010": 98.1,
+     "2020": 97.5
+    },
+    "Europe": {
+     "2010": 0.6,
+     "2020": 0.8
+    },
+    "Latin America-Caribbean": {
+     "2010": 0.1,
+     "2020": 0.1
+    },
+    "Middle East-North Africa": {
+     "2010": 0.0,
+     "2020": 0.0
+    },
+    "North America": {
+     "2010": 1.2,
+     "2020": 1.6
+    },
+    "Sub-Saharan Africa": {
+     "2010": 0.0,
+     "2020": 0.0
+    }
+   },
+   "jewish": {
+    "Asia-Pacific": {
+     "2010": 1.3,
+     "2020": 1.3
+    },
+    "Europe": {
+     "2010": 10.0,
+     "2020": 8.7
+    },
+    "Latin America-Caribbean": {
+     "2010": 3.2,
+     "2020": 2.6
+    },
+    "Middle East-North Africa": {
+     "2010": 41.5,
+     "2020": 45.9
+    },
+    "North America": {
+     "2010": 43.5,
+     "2020": 41.2
+    },
+    "Sub-Saharan Africa": {
+     "2010": 0.6,
+     "2020": 0.3
+    }
+   },
+   "other": {
+    "Asia-Pacific": {
+     "2010": 71.0,
+     "2020": 65.4
+    },
+    "Europe": {
+     "2010": 3.2,
+     "2020": 3.5
+    },
+    "Latin America-Caribbean": {
+     "2010": 6.5,
+     "2020": 11.6
+    },
+    "Middle East-North Africa": {
+     "2010": 0.3,
+     "2020": 0.4
+    },
+    "North America": {
+     "2010": 2.1,
+     "2020": 3.0
+    },
+    "Sub-Saharan Africa": {
+     "2010": 16.9,
+     "2020": 16.1
+    }
+   }
+  },
+  "region_share": {
+   "Asia-Pacific": {
+    "2010": {
+     "christian": 6.1,
+     "muslim": 24.8,
+     "none": 33.0,
+     "hindu": 25.3,
+     "buddhist": 8.1,
+     "jewish": 0.0,
+     "other": 2.6
+    },
+    "2020": {
+     "christian": 5.9,
+     "muslim": 26.1,
+     "none": 32.8,
+     "hindu": 25.7,
+     "buddhist": 7.0,
+     "jewish": 0.0,
+     "other": 2.5
+    }
+   },
+   "Europe": {
+    "2010": {
+     "christian": 74.6,
+     "muslim": 5.3,
+     "none": 18.7,
+     "hindu": 0.2,
+     "buddhist": 0.3,
+     "jewish": 0.2,
+     "other": 0.7
+    },
+    "2020": {
+     "christian": 67.1,
+     "muslim": 6.0,
+     "none": 25.3,
+     "hindu": 0.3,
+     "buddhist": 0.3,
+     "jewish": 0.2,
+     "other": 0.8
+    }
+   },
+   "Latin America-Caribbean": {
+    "2010": {
+     "christian": 90.1,
+     "muslim": 0.1,
+     "none": 7.8,
+     "hindu": 0.1,
+     "buddhist": 0.1,
+     "jewish": 0.1,
+     "other": 1.7
+    },
+    "2020": {
+     "christian": 84.6,
+     "muslim": 0.1,
+     "none": 11.9,
+     "hindu": 0.1,
+     "buddhist": 0.1,
+     "jewish": 0.1,
+     "other": 3.1
+    }
+   },
+   "Middle East-North Africa": {
+    "2010": {
+     "christian": 3.3,
+     "muslim": 94.0,
+     "none": 0.4,
+     "hindu": 0.6,
+     "buddhist": 0.0,
+     "jewish": 1.6,
+     "other": 0.1
+    },
+    "2020": {
+     "christian": 2.9,
+     "muslim": 94.2,
+     "none": 0.4,
+     "hindu": 0.7,
+     "buddhist": 0.0,
+     "jewish": 1.5,
+     "other": 0.2
+    }
+   },
+   "North America": {
+    "2010": {
+     "christian": 77.2,
+     "muslim": 1.1,
+     "none": 17.2,
+     "hindu": 0.7,
+     "buddhist": 1.1,
+     "jewish": 1.8,
+     "other": 0.9
+    },
+    "2020": {
+     "christian": 62.9,
+     "muslim": 1.6,
+     "none": 30.2,
+     "hindu": 1.0,
+     "buddhist": 1.3,
+     "jewish": 1.6,
+     "other": 1.4
+    }
+   },
+   "Sub-Saharan Africa": {
+    "2010": {
+     "christian": 61.7,
+     "muslim": 32.0,
+     "none": 3.1,
+     "hindu": 0.2,
+     "buddhist": 0.0,
+     "jewish": 0.0,
+     "other": 3.0
+    },
+    "2020": {
+     "christian": 62.0,
+     "muslim": 32.8,
+     "none": 2.6,
+     "hindu": 0.1,
+     "buddhist": 0.0,
+     "jewish": 0.0,
+     "other": 2.5
+    }
+   }
+  },
+  "region_pop": {
+   "Asia-Pacific": 4544800000.0,
+   "Europe": 752960000.0,
+   "Latin America-Caribbean": 646240000.0,
+   "Middle East-North Africa": 439690000.0,
+   "North America": 377610000.0,
+   "Sub-Saharan Africa": 1124520000.0
+  },
+  "top_change": {
+   "christian": {
+    "fall": [
+     {
+      "name": "Australia",
+      "pp": -20.4,
+      "pct2010": 67.1,
+      "pct2020": 46.8
+     },
+     {
+      "name": "Chile",
+      "pp": -17.7,
+      "pct2010": 86.0,
+      "pct2020": 68.3
+     },
+     {
+      "name": "Uruguay",
+      "pp": -16.5,
+      "pct2010": 61.0,
+      "pct2020": 44.5
+     },
+     {
+      "name": "United States",
+      "pp": -14.3,
+      "pct2010": 78.3,
+      "pct2020": 64.0
+     },
+     {
+      "name": "Canada",
+      "pp": -13.9,
+      "pct2010": 67.2,
+      "pct2020": 53.3
+     },
+     {
+      "name": "United Kingdom",
+      "pp": -13.0,
+      "pct2010": 62.4,
+      "pct2020": 49.4
+     }
+    ],
+    "rise": [
+     {
+      "name": "Mozambique",
+      "pp": 5.0,
+      "pct2010": 56.3,
+      "pct2020": 61.3
+     },
+     {
+      "name": "Madagascar",
+      "pp": 4.2,
+      "pct2010": 70.0,
+      "pct2020": 74.2
+     },
+     {
+      "name": "Ivory Coast",
+      "pp": 4.1,
+      "pct2010": 40.8,
+      "pct2020": 44.9
+     },
+     {
+      "name": "Fiji",
+      "pp": 4.0,
+      "pct2010": 65.5,
+      "pct2020": 69.5
+     },
+     {
+      "name": "Oman",
+      "pp": 3.7,
+      "pct2010": 4.4,
+      "pct2020": 8.1
+     },
+     {
+      "name": "Guinea",
+      "pp": 3.2,
+      "pct2010": 8.5,
+      "pct2020": 11.7
+     }
+    ]
+   },
+   "muslim": {
+    "fall": [
+     {
+      "name": "Oman",
+      "pp": -8.3,
+      "pct2010": 90.1,
+      "pct2020": 81.8
+     },
+     {
+      "name": "Tanzania",
+      "pp": -5.5,
+      "pct2010": 35.4,
+      "pct2020": 29.9
+     },
+     {
+      "name": "Azerbaijan",
+      "pp": -2.4,
+      "pct2010": 97.1,
+      "pct2020": 94.7
+     },
+     {
+      "name": "Kuwait",
+      "pp": -2.3,
+      "pct2010": 82.6,
+      "pct2020": 80.2
+     },
+     {
+      "name": "Cyprus",
+      "pp": -2.2,
+      "pct2010": 26.6,
+      "pct2020": 24.4
+     },
+     {
+      "name": "United Arab Emirates",
+      "pp": -2.2,
+      "pct2010": 75.1,
+      "pct2020": 72.9
+     }
+    ],
+    "rise": [
+     {
+      "name": "Kazakhstan",
+      "pp": 8.2,
+      "pct2010": 69.7,
+      "pct2020": 77.9
+     },
+     {
+      "name": "Benin",
+      "pp": 7.9,
+      "pct2010": 23.5,
+      "pct2020": 31.4
+     },
+     {
+      "name": "Lebanon",
+      "pp": 5.5,
+      "pct2010": 62.3,
+      "pct2020": 67.8
+     },
+     {
+      "name": "Syria",
+      "pp": 4.7,
+      "pct2010": 89.5,
+      "pct2020": 94.2
+     },
+     {
+      "name": "Albania",
+      "pp": 4.4,
+      "pct2010": 70.2,
+      "pct2020": 74.5
+     },
+     {
+      "name": "Cameroon",
+      "pp": 3.8,
+      "pct2010": 21.3,
+      "pct2020": 25.2
+     }
+    ]
+   },
+   "none": {
+    "fall": [
+     {
+      "name": "Mozambique",
+      "pp": -4.7,
+      "pct2010": 18.9,
+      "pct2020": 14.3
+     },
+     {
+      "name": "Ivory Coast",
+      "pp": -4.4,
+      "pct2010": 10.0,
+      "pct2020": 5.6
+     },
+     {
+      "name": "Ghana",
+      "pp": -4.2,
+      "pct2010": 5.3,
+      "pct2020": 1.1
+     },
+     {
+      "name": "Sao Tome and Principe",
+      "pp": -2.8,
+      "pct2010": 12.5,
+      "pct2020": 9.7
+     },
+     {
+      "name": "South Africa",
+      "pp": -2.7,
+      "pct2010": 5.8,
+      "pct2020": 3.1
+     },
+     {
+      "name": "Guinea",
+      "pp": -2.0,
+      "pct2010": 3.4,
+      "pct2020": 1.3
+     }
+    ],
+    "rise": [
+     {
+      "name": "Australia",
+      "pp": 17.5,
+      "pct2010": 24.9,
+      "pct2020": 42.3
+     },
+     {
+      "name": "Chile",
+      "pp": 16.7,
+      "pct2010": 13.6,
+      "pct2020": 30.3
+     },
+     {
+      "name": "Uruguay",
+      "pp": 16.1,
+      "pct2010": 36.3,
+      "pct2020": 52.4
+     },
+     {
+      "name": "United States",
+      "pp": 13.3,
+      "pct2010": 16.5,
+      "pct2020": 29.7
+     },
+     {
+      "name": "Estonia",
+      "pp": 12.1,
+      "pct2010": 31.5,
+      "pct2020": 43.6
+     },
+     {
+      "name": "United Kingdom",
+      "pp": 11.4,
+      "pct2010": 28.8,
+      "pct2020": 40.2
+     }
+    ]
+   },
+   "hindu": {
+    "fall": [
+     {
+      "name": "Fiji",
+      "pp": -3.0,
+      "pct2010": 27.1,
+      "pct2020": 24.1
+     },
+     {
+      "name": "Bahrain",
+      "pp": -1.7,
+      "pct2010": 12.9,
+      "pct2020": 11.2
+     },
+     {
+      "name": "Guyana",
+      "pp": -1.4,
+      "pct2010": 24.8,
+      "pct2020": 23.4
+     },
+     {
+      "name": "Suriname",
+      "pp": -0.9,
+      "pct2010": 23.4,
+      "pct2020": 22.5
+     },
+     {
+      "name": "Bangladesh",
+      "pp": -0.7,
+      "pct2010": 8.6,
+      "pct2020": 7.9
+     },
+     {
+      "name": "India",
+      "pp": -0.6,
+      "pct2010": 80.0,
+      "pct2020": 79.4
+     }
+    ],
+    "rise": [
+     {
+      "name": "Oman",
+      "pp": 4.4,
+      "pct2010": 5.2,
+      "pct2020": 9.5
+     },
+     {
+      "name": "Sri Lanka",
+      "pp": 2.0,
+      "pct2010": 12.6,
+      "pct2020": 14.5
+     },
+     {
+      "name": "Australia",
+      "pp": 1.5,
+      "pct2010": 1.4,
+      "pct2020": 3.0
+     },
+     {
+      "name": "Malta",
+      "pp": 1.3,
+      "pct2010": 0.1,
+      "pct2020": 1.4
+     },
+     {
+      "name": "Kuwait",
+      "pp": 1.1,
+      "pct2010": 7.4,
+      "pct2020": 8.5
+     },
+     {
+      "name": "United Arab Emirates",
+      "pp": 1.0,
+      "pct2010": 10.8,
+      "pct2020": 11.8
+     }
+    ]
+   },
+   "buddhist": {
+    "fall": [
+     {
+      "name": "South Korea",
+      "pp": -6.6,
+      "pct2010": 25.6,
+      "pct2020": 19.0
+     },
+     {
+      "name": "Japan",
+      "pp": -4.6,
+      "pct2010": 41.8,
+      "pct2020": 37.2
+     },
+     {
+      "name": "Vietnam",
+      "pp": -4.6,
+      "pct2010": 27.6,
+      "pct2020": 23.0
+     },
+     {
+      "name": "Hong Kong",
+      "pp": -3.5,
+      "pct2010": 11.9,
+      "pct2020": 8.4
+     },
+     {
+      "name": "Mongolia",
+      "pp": -2.7,
+      "pct2010": 53.9,
+      "pct2020": 51.1
+     },
+     {
+      "name": "Singapore",
+      "pp": -2.2,
+      "pct2010": 33.0,
+      "pct2020": 30.8
+     }
+    ],
+    "rise": [
+     {
+      "name": "Myanmar",
+      "pp": 1.4,
+      "pct2010": 87.6,
+      "pct2020": 89.1
+     },
+     {
+      "name": "Thailand",
+      "pp": 0.9,
+      "pct2010": 93.4,
+      "pct2020": 94.4
+     },
+     {
+      "name": "Iceland",
+      "pp": 0.9,
+      "pct2010": 0.4,
+      "pct2020": 1.3
+     },
+     {
+      "name": "Canada",
+      "pp": 0.6,
+      "pct2010": 1.1,
+      "pct2020": 1.7
+     },
+     {
+      "name": "Malta",
+      "pp": 0.5,
+      "pct2010": 0.1,
+      "pct2020": 0.6
+     },
+     {
+      "name": "Luxembourg",
+      "pp": 0.4,
+      "pct2010": 0.1,
+      "pct2020": 0.5
+     }
+    ]
+   },
+   "jewish": {
+    "fall": [
+     {
+      "name": "Israel",
+      "pp": -1.5,
+      "pct2010": 78.5,
+      "pct2020": 77.0
+     },
+     {
+      "name": "United States",
+      "pp": -0.1,
+      "pct2010": 1.8,
+      "pct2020": 1.7
+     },
+     {
+      "name": "Austria",
+      "pp": -0.1,
+      "pct2010": 0.2,
+      "pct2020": 0.1
+     },
+     {
+      "name": "Latvia",
+      "pp": -0.1,
+      "pct2010": 0.3,
+      "pct2020": 0.2
+     },
+     {
+      "name": "Chile",
+      "pp": -0.1,
+      "pct2010": 0.2,
+      "pct2020": 0.1
+     },
+     {
+      "name": "France",
+      "pp": -0.1,
+      "pct2010": 0.8,
+      "pct2020": 0.7
+     }
+    ],
+    "rise": [
+     {
+      "name": "Luxembourg",
+      "pp": 0.3,
+      "pct2010": 0.2,
+      "pct2020": 0.5
+     },
+     {
+      "name": "Malta",
+      "pp": 0.3,
+      "pct2010": 0.0,
+      "pct2020": 0.3
+     },
+     {
+      "name": "Sweden",
+      "pp": 0.1,
+      "pct2010": 0.1,
+      "pct2020": 0.2
+     },
+     {
+      "name": "Iceland",
+      "pp": 0.1,
+      "pct2010": 0.1,
+      "pct2020": 0.2
+     },
+     {
+      "name": "Equatorial Guinea",
+      "pp": 0.1,
+      "pct2010": 0.0,
+      "pct2020": 0.1
+     },
+     {
+      "name": "Ireland",
+      "pp": 0.0,
+      "pct2010": 0.0,
+      "pct2020": 0.1
+     }
+    ]
+   },
+   "other": {
+    "fall": [
+     {
+      "name": "Guinea-Bissau",
+      "pp": -7.0,
+      "pct2010": 17.7,
+      "pct2020": 10.7
+     },
+     {
+      "name": "Madagascar",
+      "pp": -4.6,
+      "pct2010": 6.9,
+      "pct2020": 2.2
+     },
+     {
+      "name": "Burkina Faso",
+      "pp": -4.4,
+      "pct2010": 8.4,
+      "pct2020": 4.0
+     },
+     {
+      "name": "Estonia",
+      "pp": -3.6,
+      "pct2010": 6.4,
+      "pct2020": 2.8
+     },
+     {
+      "name": "Benin",
+      "pp": -3.3,
+      "pct2010": 13.8,
+      "pct2020": 10.5
+     },
+     {
+      "name": "Angola",
+      "pp": -3.2,
+      "pct2010": 3.8,
+      "pct2020": 0.6
+     }
+    ],
+    "rise": [
+     {
+      "name": "Colombia",
+      "pp": 3.5,
+      "pct2010": 0.3,
+      "pct2020": 3.8
+     },
+     {
+      "name": "Brazil",
+      "pp": 3.2,
+      "pct2010": 2.5,
+      "pct2020": 5.7
+     },
+     {
+      "name": "Ecuador",
+      "pp": 2.9,
+      "pct2010": 0.1,
+      "pct2020": 3.0
+     },
+     {
+      "name": "Dominican Republic",
+      "pp": 2.6,
+      "pct2010": 0.1,
+      "pct2020": 2.7
+     },
+     {
+      "name": "South Africa",
+      "pp": 2.1,
+      "pct2010": 6.7,
+      "pct2020": 8.9
+     },
+     {
+      "name": "Ghana",
+      "pp": 1.8,
+      "pct2010": 6.0,
+      "pct2020": 7.8
+     }
+    ]
+   }
+  },
+  "top_share": {
+   "christian": [
+    {
+     "name": "Timor-Leste",
+     "pct": 99.5
+    },
+    {
+     "name": "Moldova",
+     "pct": 99.5
+    },
+    {
+     "name": "Papua New Guinea",
+     "pct": 99.1
+    },
+    {
+     "name": "Federated States of Micronesia",
+     "pct": 98.8
+    },
+    {
+     "name": "Romania",
+     "pct": 98.5
+    },
+    {
+     "name": "Zambia",
+     "pct": 98.3
+    },
+    {
+     "name": "Tonga",
+     "pct": 97.8
+    },
+    {
+     "name": "Samoa",
+     "pct": 97.6
+    }
+   ],
+   "muslim": [
+    {
+     "name": "Yemen",
+     "pct": 99.9
+    },
+    {
+     "name": "Afghanistan",
+     "pct": 99.9
+    },
+    {
+     "name": "Somalia",
+     "pct": 99.8
+    },
+    {
+     "name": "Iran",
+     "pct": 99.8
+    },
+    {
+     "name": "Morocco",
+     "pct": 99.7
+    },
+    {
+     "name": "Western Sahara",
+     "pct": 99.6
+    },
+    {
+     "name": "Iraq",
+     "pct": 99.5
+    },
+    {
+     "name": "Tunisia",
+     "pct": 99.3
+    }
+   ],
+   "none": [
+    {
+     "name": "China",
+     "pct": 89.6
+    },
+    {
+     "name": "North Korea",
+     "pct": 72.9
+    },
+    {
+     "name": "Czech Republic",
+     "pct": 72.8
+    },
+    {
+     "name": "Hong Kong",
+     "pct": 71.4
+    },
+    {
+     "name": "Vietnam",
+     "pct": 67.7
+    },
+    {
+     "name": "Macao",
+     "pct": 67.6
+    },
+    {
+     "name": "Japan",
+     "pct": 57.5
+    },
+    {
+     "name": "Netherlands",
+     "pct": 54.1
+    }
+   ],
+   "hindu": [
+    {
+     "name": "Nepal",
+     "pct": 81.2
+    },
+    {
+     "name": "India",
+     "pct": 79.4
+    },
+    {
+     "name": "Mauritius",
+     "pct": 48.3
+    },
+    {
+     "name": "Fiji",
+     "pct": 24.1
+    },
+    {
+     "name": "Guyana",
+     "pct": 23.4
+    },
+    {
+     "name": "Bhutan",
+     "pct": 22.5
+    },
+    {
+     "name": "Suriname",
+     "pct": 22.5
+    },
+    {
+     "name": "Trinidad and Tobago",
+     "pct": 20.6
+    }
+   ],
+   "buddhist": [
+    {
+     "name": "Cambodia",
+     "pct": 97.1
+    },
+    {
+     "name": "Thailand",
+     "pct": 94.4
+    },
+    {
+     "name": "Myanmar",
+     "pct": 89.1
+    },
+    {
+     "name": "Bhutan",
+     "pct": 74.7
+    },
+    {
+     "name": "Sri Lanka",
+     "pct": 69.6
+    },
+    {
+     "name": "Laos",
+     "pct": 64.2
+    },
+    {
+     "name": "Mongolia",
+     "pct": 51.1
+    },
+    {
+     "name": "Japan",
+     "pct": 37.2
+    }
+   ],
+   "jewish": [
+    {
+     "name": "Israel",
+     "pct": 77.0
+    },
+    {
+     "name": "United States",
+     "pct": 1.7
+    },
+    {
+     "name": "Canada",
+     "pct": 0.9
+    },
+    {
+     "name": "France",
+     "pct": 0.7
+    },
+    {
+     "name": "Luxembourg",
+     "pct": 0.5
+    },
+    {
+     "name": "Uruguay",
+     "pct": 0.5
+    },
+    {
+     "name": "United Kingdom",
+     "pct": 0.4
+    },
+    {
+     "name": "Australia",
+     "pct": 0.4
+    }
+   ],
+   "other": [
+    {
+     "name": "Taiwan",
+     "pct": 51.7
+    },
+    {
+     "name": "Laos",
+     "pct": 34.2
+    },
+    {
+     "name": "South Sudan",
+     "pct": 32.8
+    },
+    {
+     "name": "North Korea",
+     "pct": 25.2
+    },
+    {
+     "name": "Togo",
+     "pct": 19.0
+    },
+    {
+     "name": "Cuba",
+     "pct": 17.4
+    },
+    {
+     "name": "Vanuatu",
+     "pct": 15.1
+    },
+    {
+     "name": "Aruba",
+     "pct": 11.2
+    }
+   ]
+  },
+  "top_count": {
+   "christian": [
+    {
+     "name": "United States",
+     "m": 217.3
+    },
+    {
+     "name": "Brazil",
+     "m": 168.3
+    },
+    {
+     "name": "Mexico",
+     "m": 113.1
+    },
+    {
+     "name": "Philippines",
+     "m": 102.5
+    },
+    {
+     "name": "Russia",
+     "m": 102.4
+    },
+    {
+     "name": "Nigeria",
+     "m": 92.8
+    }
+   ],
+   "muslim": [
+    {
+     "name": "Indonesia",
+     "m": 239.0
+    },
+    {
+     "name": "Pakistan",
+     "m": 226.9
+    },
+    {
+     "name": "India",
+     "m": 213.1
+    },
+    {
+     "name": "Bangladesh",
+     "m": 151.4
+    },
+    {
+     "name": "Nigeria",
+     "m": 120.0
+    },
+    {
+     "name": "Egypt",
+     "m": 104.0
+    }
+   ],
+   "none": [
+    {
+     "name": "China",
+     "m": 1278.1
+    },
+    {
+     "name": "United States",
+     "m": 100.9
+    },
+    {
+     "name": "Japan",
+     "m": 72.6
+    },
+    {
+     "name": "Vietnam",
+     "m": 66.4
+    },
+    {
+     "name": "Germany",
+     "m": 30.2
+    },
+    {
+     "name": "Russia",
+     "m": 29.6
+    }
+   ],
+   "hindu": [
+    {
+     "name": "India",
+     "m": 1113.2
+    },
+    {
+     "name": "Nepal",
+     "m": 23.5
+    },
+    {
+     "name": "Bangladesh",
+     "m": 13.1
+    },
+    {
+     "name": "Pakistan",
+     "m": 5.0
+    },
+    {
+     "name": "Indonesia",
+     "m": 4.4
+    },
+    {
+     "name": "Sri Lanka",
+     "m": 3.3
+    }
+   ],
+   "buddhist": [
+    {
+     "name": "Thailand",
+     "m": 67.6
+    },
+    {
+     "name": "China",
+     "m": 53.4
+    },
+    {
+     "name": "Myanmar",
+     "m": 47.2
+    },
+    {
+     "name": "Japan",
+     "m": 47.0
+    },
+    {
+     "name": "Vietnam",
+     "m": 22.6
+    },
+    {
+     "name": "Cambodia",
+     "m": 16.2
+    }
+   ],
+   "jewish": [
+    {
+     "name": "Israel",
+     "m": 6.8
+    },
+    {
+     "name": "United States",
+     "m": 5.7
+    },
+    {
+     "name": "France",
+     "m": 0.5
+    },
+    {
+     "name": "Canada",
+     "m": 0.4
+    },
+    {
+     "name": "United Kingdom",
+     "m": 0.3
+    },
+    {
+     "name": "Argentina",
+     "m": 0.2
+    }
+   ],
+   "other": [
+    {
+     "name": "China",
+     "m": 43.1
+    },
+    {
+     "name": "India",
+     "m": 35.7
+    },
+    {
+     "name": "Taiwan",
+     "m": 12.2
+    },
+    {
+     "name": "Brazil",
+     "m": 11.9
+    },
+    {
+     "name": "North Korea",
+     "m": 6.6
+    },
+    {
+     "name": "South Africa",
+     "m": 5.4
+    }
+   ]
+  },
+  "rdi_top": [
+   {
+    "name": "Singapore",
+    "rdi": 9.3,
+    "rank": 1,
+    "level": "Very high"
+   },
+   {
+    "name": "Suriname",
+    "rdi": 7.5,
+    "rank": 2,
+    "level": "Very high"
+   },
+   {
+    "name": "Taiwan",
+    "rdi": 7.5,
+    "rank": 3,
+    "level": "Very high"
+   },
+   {
+    "name": "South Korea",
+    "rdi": 7.3,
+    "rank": 4,
+    "level": "Very high"
+   },
+   {
+    "name": "Mauritius",
+    "rdi": 7.3,
+    "rank": 5,
+    "level": "Very high"
+   },
+   {
+    "name": "Guinea-Bissau",
+    "rdi": 7.2,
+    "rank": 6,
+    "level": "Very high"
+   },
+   {
+    "name": "Togo",
+    "rdi": 7.1,
+    "rank": 7,
+    "level": "Very high"
+   },
+   {
+    "name": "Benin",
+    "rdi": 7.1,
+    "rank": 8,
+    "level": "Very high"
+   },
+   {
+    "name": "Australia",
+    "rdi": 7.0,
+    "rank": 9,
+    "level": "High"
+   },
+   {
+    "name": "France",
+    "rdi": 6.9,
+    "rank": 10,
+    "level": "High"
+   }
+  ],
+  "rdi_bottom_n": 41,
+  "rdi_levels": {
+   "Very low": 41,
+   "Moderate": 89,
+   "Low": 30,
+   "High": 33,
+   "Very high": 8
+  },
+  "rdi_world": 9.0,
+  "rdi_regions": {
+   "Asia-Pacific": 8.7,
+   "Europe": 5.6,
+   "Latin America-Caribbean": 3.1,
+   "Middle East-North Africa": 1.3,
+   "North America": 6.0,
+   "Sub-Saharan Africa": 5.9
+  },
+  "uk": {
+   "christian2010": 62.4,
+   "christian2020": 49.4,
+   "none2010": 28.8,
+   "none2020": 40.2,
+   "muslim2010": 5.3,
+   "muslim2020": 6.4
+  },
+  "christ_down_n": 127,
+  "none_up_n": 103,
+  "china_none_pct": 89.6,
+  "china_none_m": 1278,
+  "china_share_of_none": 67.1,
+  "ssa_christ_m2020": 697,
+  "eur_christ_m2020": 505,
+  "ssa_christ_m2010": 532,
+  "eur_christ_m2010": 554
+ },
+ "uk": {
+  "ew2021": {
+   "christian": 46.2,
+   "none": 37.2,
+   "muslim": 6.5,
+   "hindu": 1.7,
+   "sikh": 0.9,
+   "jewish": 0.5,
+   "buddhist": 0.5,
+   "other": 0.6,
+   "notstated": 6.0
+  },
+  "ew2011": {
+   "christian": 59.3,
+   "none": 25.1,
+   "muslim": 4.8,
+   "hindu": 1.5,
+   "sikh": 0.8,
+   "jewish": 0.5,
+   "buddhist": 0.4,
+   "other": 0.4,
+   "notstated": 7.2
+  },
+  "eng2021": {
+   "christian": 46.3,
+   "none": 36.7,
+   "muslim": 6.7,
+   "hindu": 1.8,
+   "sikh": 0.9,
+   "jewish": 0.5,
+   "buddhist": 0.5,
+   "other": 0.6,
+   "notstated": 6.0
+  },
+  "eng2011": {
+   "christian": 59.4,
+   "none": 24.7,
+   "muslim": 5.0,
+   "hindu": 1.5,
+   "sikh": 0.8,
+   "jewish": 0.5,
+   "buddhist": 0.5,
+   "other": 0.4,
+   "notstated": 7.2
+  },
+  "wal2021": {
+   "christian": 43.6,
+   "none": 46.5,
+   "muslim": 2.2,
+   "hindu": 0.4,
+   "sikh": 0.1,
+   "jewish": 0.1,
+   "buddhist": 0.3,
+   "other": 0.5,
+   "notstated": 6.3
+  },
+  "wal2011": {
+   "christian": 57.6,
+   "none": 32.1,
+   "muslim": 1.5,
+   "hindu": 0.3,
+   "sikh": 0.1,
+   "jewish": 0.1,
+   "buddhist": 0.3,
+   "other": 0.4,
+   "notstated": 7.6
+  },
+  "scot": {
+   "christian": 38.8,
+   "none": 51.1,
+   "muslim": 2.2,
+   "hindu": 0.6,
+   "sikh": 0.2,
+   "jewish": 0.1,
+   "buddhist": 0.3,
+   "other": 0.6,
+   "notstated": 6.2
+  },
+  "ni": {
+   "christian": 79.7,
+   "none": 17.4,
+   "muslim": null,
+   "hindu": null,
+   "sikh": null,
+   "jewish": null,
+   "buddhist": null,
+   "other": 1.3,
+   "notstated": 1.6
+  },
+  "ew_total2021": 59597540,
+  "ew_christian_m": 27.5,
+  "ew_none_m": 22.2,
+  "ew_muslim_m": 3.9,
+  "ew11_christian_m": 33.2,
+  "ew11_none_m": 14.1,
+  "ew_change": {
+   "christian": -13.1,
+   "none": 12.1,
+   "muslim": 1.7,
+   "hindu": 0.2,
+   "sikh": 0.1,
+   "jewish": 0.0,
+   "buddhist": 0.1,
+   "other": 0.2,
+   "notstated": -1.2
+  },
+  "scot_detail": {
+   "cos": 20.4,
+   "rc": 13.3,
+   "ochr": 5.1,
+   "pagan": 0.4
+  },
+  "ni_detail": {
+   "cath": 42.3,
+   "pres": 16.6,
+   "coi": 11.5,
+   "meth": 2.4,
+   "ochr": 6.9
+  },
+  "ni_prot_all": 37.4,
+  "ni_brought_up": {
+   "cath": 45.7,
+   "prot": 43.5,
+   "other": 1.5,
+   "none": 9.3
+  },
+  "uk3": {
+   "total": 66940560,
+   "christian": 46.5,
+   "none": 37.8,
+   "christian_m": 31.1,
+   "none_m": 25.3
+  },
+  "la": {
+   "n": 361,
+   "largest": {
+    "christian": 284,
+    "none": 75,
+    "muslim": 2
+   },
+   "none_largest_by_nation": {
+    "England": 39,
+    "Scotland": 25,
+    "Wales": 11
+   },
+   "n_by_nation": {
+    "England": 296,
+    "Northern Ireland": 11,
+    "Scotland": 32,
+    "Wales": 22
+   },
+   "muslim_largest": [
+    "Redbridge",
+    "Tower Hamlets"
+   ],
+   "ew_n": 318,
+   "ew_none_largest_2011": 0,
+   "ew_none_largest_2021": 50,
+   "ew_christian_fell": 318,
+   "ew_none_rose": 317,
+   "top": {
+    "christian": [
+     {
+      "name": "Mid Ulster",
+      "nation": "Northern Ireland",
+      "pct": 90.2
+     },
+     {
+      "name": "Derry City and Strabane",
+      "nation": "Northern Ireland",
+      "pct": 89.5
+     },
+     {
+      "name": "Fermanagh and Omagh",
+      "nation": "Northern Ireland",
+      "pct": 89.1
+     },
+     {
+      "name": "Newry, Mourne and Down",
+      "nation": "Northern Ireland",
+      "pct": 87.2
+     },
+     {
+      "name": "Causeway Coast and Glens",
+      "nation": "Northern Ireland",
+      "pct": 82.9
+     }
+    ],
+    "none": [
+     {
+      "name": "Shetland Islands",
+      "nation": "Scotland",
+      "pct": 62.8
+     },
+     {
+      "name": "Fife",
+      "nation": "Scotland",
+      "pct": 60.6
+     },
+     {
+      "name": "Midlothian",
+      "nation": "Scotland",
+      "pct": 60.5
+     },
+     {
+      "name": "Aberdeenshire",
+      "nation": "Scotland",
+      "pct": 59.0
+     },
+     {
+      "name": "Clackmannanshire",
+      "nation": "Scotland",
+      "pct": 58.3
+     }
+    ],
+    "muslim": [
+     {
+      "name": "Tower Hamlets",
+      "nation": "England",
+      "pct": 39.9
+     },
+     {
+      "name": "Blackburn with Darwen",
+      "nation": "England",
+      "pct": 35.0
+     },
+     {
+      "name": "Newham",
+      "nation": "England",
+      "pct": 34.8
+     },
+     {
+      "name": "Luton",
+      "nation": "England",
+      "pct": 32.9
+     },
+     {
+      "name": "Redbridge",
+      "nation": "England",
+      "pct": 31.3
+     }
+    ],
+    "hindu": [
+     {
+      "name": "Harrow",
+      "nation": "England",
+      "pct": 25.8
+     },
+     {
+      "name": "Leicester",
+      "nation": "England",
+      "pct": 17.9
+     },
+     {
+      "name": "Brent",
+      "nation": "England",
+      "pct": 15.6
+     },
+     {
+      "name": "Redbridge",
+      "nation": "England",
+      "pct": 11.1
+     },
+     {
+      "name": "Hillingdon",
+      "nation": "England",
+      "pct": 10.8
+     }
+    ],
+    "sikh": [
+     {
+      "name": "Wolverhampton",
+      "nation": "England",
+      "pct": 12.0
+     },
+     {
+      "name": "Sandwell",
+      "nation": "England",
+      "pct": 11.5
+     },
+     {
+      "name": "Slough",
+      "nation": "England",
+      "pct": 11.3
+     },
+     {
+      "name": "Hillingdon",
+      "nation": "England",
+      "pct": 8.6
+     },
+     {
+      "name": "Hounslow",
+      "nation": "England",
+      "pct": 8.6
+     }
+    ],
+    "jewish": [
+     {
+      "name": "Hertsmere",
+      "nation": "England",
+      "pct": 17.0
+     },
+     {
+      "name": "Barnet",
+      "nation": "England",
+      "pct": 14.5
+     },
+     {
+      "name": "Hackney",
+      "nation": "England",
+      "pct": 6.7
+     },
+     {
+      "name": "Bury",
+      "nation": "England",
+      "pct": 5.5
+     },
+     {
+      "name": "Camden",
+      "nation": "England",
+      "pct": 4.8
+     }
+    ],
+    "buddhist": [
+     {
+      "name": "Rushmoor",
+      "nation": "England",
+      "pct": 4.7
+     },
+     {
+      "name": "Greenwich",
+      "nation": "England",
+      "pct": 1.7
+     },
+     {
+      "name": "Reading",
+      "nation": "England",
+      "pct": 1.7
+     },
+     {
+      "name": "Hounslow",
+      "nation": "England",
+      "pct": 1.4
+     },
+     {
+      "name": "Westminster",
+      "nation": "England",
+      "pct": 1.3
+     }
+    ],
+    "other": [
+     {
+      "name": "Enfield",
+      "nation": "England",
+      "pct": 3.1
+     },
+     {
+      "name": "Belfast",
+      "nation": "Northern Ireland",
+      "pct": 3.0
+     },
+     {
+      "name": "Harrow",
+      "nation": "England",
+      "pct": 2.9
+     },
+     {
+      "name": "Haringey",
+      "nation": "England",
+      "pct": 2.3
+     },
+     {
+      "name": "Hackney",
+      "nation": "England",
+      "pct": 1.9
+     }
+    ],
+    "notstated": [
+     {
+      "name": "Kensington and Chelsea",
+      "nation": "England",
+      "pct": 10.0
+     },
+     {
+      "name": "Oxford",
+      "nation": "England",
+      "pct": 9.9
+     },
+     {
+      "name": "Cambridge",
+      "nation": "England",
+      "pct": 9.8
+     },
+     {
+      "name": "Westminster",
+      "nation": "England",
+      "pct": 9.4
+     },
+     {
+      "name": "City of London",
+      "nation": "England",
+      "pct": 8.9
+     }
+    ]
+   },
+   "change": {
+    "christian": {
+     "fall": [
+      {
+       "name": "South Tyneside",
+       "pp": -17.6
+      },
+      {
+       "name": "Rotherham",
+       "pp": -17.5
+      },
+      {
+       "name": "County Durham",
+       "pp": -17.4
+      },
+      {
+       "name": "Hartlepool",
+       "pp": -17.4
+      },
+      {
+       "name": "Wakefield",
+       "pp": -17.4
+      }
+     ],
+     "rise": [
+      {
+       "name": "Camden",
+       "pp": -2.6
+      },
+      {
+       "name": "Brent",
+       "pp": -2.7
+      },
+      {
+       "name": "Harrow",
+       "pp": -3.4
+      },
+      {
+       "name": "Hounslow",
+       "pp": -3.7
+      },
+      {
+       "name": "Barnet",
+       "pp": -4.7
+      }
+     ]
+    },
+    "none": {
+     "fall": [
+      {
+       "name": "Barking and Dagenham",
+       "pp": -0.1
+      },
+      {
+       "name": "Leicester",
+       "pp": 0.1
+      },
+      {
+       "name": "Slough",
+       "pp": 0.9
+      },
+      {
+       "name": "Luton",
+       "pp": 1.0
+      },
+      {
+       "name": "Harrow",
+       "pp": 1.1
+      }
+     ],
+     "rise": [
+      {
+       "name": "South Tyneside",
+       "pp": 18.2
+      },
+      {
+       "name": "Barnsley",
+       "pp": 18.1
+      },
+      {
+       "name": "North Tyneside",
+       "pp": 18.0
+      },
+      {
+       "name": "Redcar and Cleveland",
+       "pp": 18.0
+      },
+      {
+       "name": "Bolsover",
+       "pp": 17.9
+      }
+     ]
+    },
+    "muslim": {
+     "fall": [
+      {
+       "name": "Haringey",
+       "pp": -1.6
+      },
+      {
+       "name": "Hackney",
+       "pp": -0.8
+      },
+      {
+       "name": "Waltham Forest",
+       "pp": -0.3
+      },
+      {
+       "name": "Gwynedd",
+       "pp": -0.2
+      },
+      {
+       "name": "Isles of Scilly",
+       "pp": -0.1
+      }
+     ],
+     "rise": [
+      {
+       "name": "Barking and Dagenham",
+       "pp": 10.7
+      },
+      {
+       "name": "Pendle",
+       "pp": 8.6
+      },
+      {
+       "name": "Luton",
+       "pp": 8.3
+      },
+      {
+       "name": "Bolton",
+       "pp": 8.2
+      },
+      {
+       "name": "Birmingham",
+       "pp": 8.0
+      }
+     ]
+    },
+    "hindu": {
+     "fall": [
+      {
+       "name": "Newham",
+       "pp": -2.7
+      },
+      {
+       "name": "Brent",
+       "pp": -2.3
+      },
+      {
+       "name": "Ealing",
+       "pp": -0.9
+      },
+      {
+       "name": "Hounslow",
+       "pp": -0.8
+      },
+      {
+       "name": "Barnet",
+       "pp": -0.5
+      }
+     ],
+     "rise": [
+      {
+       "name": "Three Rivers",
+       "pp": 3.8
+      },
+      {
+       "name": "Watford",
+       "pp": 3.4
+      },
+      {
+       "name": "Sutton",
+       "pp": 2.8
+      },
+      {
+       "name": "Hillingdon",
+       "pp": 2.8
+      },
+      {
+       "name": "Wokingham",
+       "pp": 2.7
+      }
+     ]
+    },
+    "sikh": {
+     "fall": [
+      {
+       "name": "Redbridge",
+       "pp": -0.5
+      },
+      {
+       "name": "Newham",
+       "pp": -0.5
+      },
+      {
+       "name": "Hounslow",
+       "pp": -0.4
+      },
+      {
+       "name": "Greenwich",
+       "pp": -0.3
+      },
+      {
+       "name": "North Hertfordshire",
+       "pp": -0.2
+      }
+     ],
+     "rise": [
+      {
+       "name": "Wolverhampton",
+       "pp": 3.0
+      },
+      {
+       "name": "Sandwell",
+       "pp": 2.7
+      },
+      {
+       "name": "Hillingdon",
+       "pp": 2.0
+      },
+      {
+       "name": "Walsall",
+       "pp": 1.7
+      },
+      {
+       "name": "Spelthorne",
+       "pp": 1.2
+      }
+     ]
+    },
+    "jewish": {
+     "fall": [
+      {
+       "name": "Harrow",
+       "pp": -1.6
+      },
+      {
+       "name": "Redbridge",
+       "pp": -1.6
+      },
+      {
+       "name": "Barnet",
+       "pp": -0.6
+      },
+      {
+       "name": "Westminster",
+       "pp": -0.5
+      },
+      {
+       "name": "Brent",
+       "pp": -0.3
+      }
+     ],
+     "rise": [
+      {
+       "name": "Hertsmere",
+       "pp": 2.7
+      },
+      {
+       "name": "Haringey",
+       "pp": 0.6
+      },
+      {
+       "name": "Salford",
+       "pp": 0.6
+      },
+      {
+       "name": "Castle Point",
+       "pp": 0.5
+      },
+      {
+       "name": "Hackney",
+       "pp": 0.4
+      }
+     ]
+    },
+    "buddhist": {
+     "fall": [
+      {
+       "name": "Brent",
+       "pp": -0.5
+      },
+      {
+       "name": "Kensington and Chelsea",
+       "pp": -0.4
+      },
+      {
+       "name": "Southwark",
+       "pp": -0.4
+      },
+      {
+       "name": "Hackney",
+       "pp": -0.3
+      },
+      {
+       "name": "Isles of Scilly",
+       "pp": -0.3
+      }
+     ],
+     "rise": [
+      {
+       "name": "Rushmoor",
+       "pp": 1.4
+      },
+      {
+       "name": "Reading",
+       "pp": 0.5
+      },
+      {
+       "name": "Basingstoke and Deane",
+       "pp": 0.3
+      },
+      {
+       "name": "Ashford",
+       "pp": 0.3
+      },
+      {
+       "name": "Watford",
+       "pp": 0.3
+      }
+     ]
+    },
+    "other": {
+     "fall": [
+      {
+       "name": "Isles of Scilly",
+       "pp": -0.2
+      },
+      {
+       "name": "Stroud",
+       "pp": -0.0
+      },
+      {
+       "name": "Ceredigion",
+       "pp": -0.0
+      },
+      {
+       "name": "Wolverhampton",
+       "pp": -0.0
+      },
+      {
+       "name": "Rother",
+       "pp": -0.0
+      }
+     ],
+     "rise": [
+      {
+       "name": "Enfield",
+       "pp": 2.5
+      },
+      {
+       "name": "Haringey",
+       "pp": 1.8
+      },
+      {
+       "name": "Hackney",
+       "pp": 1.4
+      },
+      {
+       "name": "Broxbourne",
+       "pp": 1.3
+      },
+      {
+       "name": "Islington",
+       "pp": 0.9
+      }
+     ]
+    },
+    "notstated": {
+     "fall": [
+      {
+       "name": "Camden",
+       "pp": -11.6
+      },
+      {
+       "name": "Islington",
+       "pp": -8.8
+      },
+      {
+       "name": "Tower Hamlets",
+       "pp": -8.5
+      },
+      {
+       "name": "Isles of Scilly",
+       "pp": -3.6
+      },
+      {
+       "name": "South Hams",
+       "pp": -2.4
+      }
+     ],
+     "rise": [
+      {
+       "name": "Oxford",
+       "pp": 1.6
+      },
+      {
+       "name": "Cambridge",
+       "pp": 0.8
+      },
+      {
+       "name": "Newham",
+       "pp": 0.1
+      },
+      {
+       "name": "City of London",
+       "pp": 0.1
+      },
+      {
+       "name": "Westminster",
+       "pp": 0.0
+      }
+     ]
+    }
+   }
+  },
+  "msoa": {
+   "n": 7264,
+   "none_largest": 1599,
+   "christian_majority": 2772,
+   "none_majority": 494,
+   "largest": {
+    "christian": 5340,
+    "none": 1599,
+    "muslim": 283,
+    "jewish": 15,
+    "hindu": 15,
+    "sikh": 12
+   },
+   "top": {
+    "christian": [
+     {
+      "name": "Liverpool 007",
+      "la": "Liverpool",
+      "pct": 75.6
+     },
+     {
+      "name": "Liverpool 021",
+      "la": "Liverpool",
+      "pct": 75.5
+     },
+     {
+      "name": "Knowsley 016",
+      "la": "Knowsley",
+      "pct": 75.2
+     },
+     {
+      "name": "Sefton 026",
+      "la": "Sefton",
+      "pct": 74.7
+     },
+     {
+      "name": "St. Helens 009",
+      "la": "St. Helens",
+      "pct": 73.1
+     }
+    ],
+    "none": [
+     {
+      "name": "Brighton and Hove 022",
+      "la": "Brighton and Hove",
+      "pct": 68.1
+     },
+     {
+      "name": "Brighton and Hove 018",
+      "la": "Brighton and Hove",
+      "pct": 67.0
+     },
+     {
+      "name": "Brighton and Hove 015",
+      "la": "Brighton and Hove",
+      "pct": 66.1
+     },
+     {
+      "name": "Brighton and Hove 010",
+      "la": "Brighton and Hove",
+      "pct": 66.1
+     },
+     {
+      "name": "Bristol 036",
+      "la": "Bristol, City of",
+      "pct": 65.8
+     }
+    ],
+    "muslim": [
+     {
+      "name": "Birmingham 070",
+      "la": "Birmingham",
+      "pct": 87.0
+     },
+     {
+      "name": "Blackburn with Darwen 004",
+      "la": "Blackburn with Darwen",
+      "pct": 85.3
+     },
+     {
+      "name": "Birmingham 082",
+      "la": "Birmingham",
+      "pct": 84.8
+     },
+     {
+      "name": "Blackburn with Darwen 003",
+      "la": "Blackburn with Darwen",
+      "pct": 84.3
+     },
+     {
+      "name": "Bradford 033",
+      "la": "Bradford",
+      "pct": 84.0
+     }
+    ],
+    "hindu": [
+     {
+      "name": "Leicester 010",
+      "la": "Leicester",
+      "pct": 73.3
+     },
+     {
+      "name": "Leicester 006",
+      "la": "Leicester",
+      "pct": 64.4
+     },
+     {
+      "name": "Leicester 007",
+      "la": "Leicester",
+      "pct": 62.1
+     },
+     {
+      "name": "Brent 026",
+      "la": "Brent",
+      "pct": 47.2
+     },
+     {
+      "name": "Leicester 005",
+      "la": "Leicester",
+      "pct": 46.9
+     }
+    ],
+    "sikh": [
+     {
+      "name": "Ealing 044",
+      "la": "Ealing",
+      "pct": 42.3
+     },
+     {
+      "name": "Wolverhampton 030",
+      "la": "Wolverhampton",
+      "pct": 38.5
+     },
+     {
+      "name": "Ealing 038",
+      "la": "Ealing",
+      "pct": 38.4
+     },
+     {
+      "name": "Ealing 017",
+      "la": "Ealing",
+      "pct": 35.2
+     },
+     {
+      "name": "Birmingham 133",
+      "la": "Birmingham",
+      "pct": 34.6
+     }
+    ],
+    "jewish": [
+     {
+      "name": "Salford 010",
+      "la": "Salford",
+      "pct": 56.7
+     },
+     {
+      "name": "Barnet 037",
+      "la": "Barnet",
+      "pct": 53.1
+     },
+     {
+      "name": "Hackney 001",
+      "la": "Hackney",
+      "pct": 51.4
+     },
+     {
+      "name": "Bury 026",
+      "la": "Bury",
+      "pct": 46.4
+     },
+     {
+      "name": "Haringey 029",
+      "la": "Haringey",
+      "pct": 45.4
+     }
+    ],
+    "buddhist": [
+     {
+      "name": "Rushmoor 002",
+      "la": "Rushmoor",
+      "pct": 10.4
+     },
+     {
+      "name": "Rushmoor 008",
+      "la": "Rushmoor",
+      "pct": 10.0
+     },
+     {
+      "name": "Rushmoor 001",
+      "la": "Rushmoor",
+      "pct": 7.1
+     },
+     {
+      "name": "Greenwich 006",
+      "la": "Greenwich",
+      "pct": 6.4
+     },
+     {
+      "name": "Rushmoor 010",
+      "la": "Rushmoor",
+      "pct": 6.2
+     }
+    ],
+    "other": [
+     {
+      "name": "Brent 004",
+      "la": "Brent",
+      "pct": 8.0
+     },
+     {
+      "name": "Harrow 033",
+      "la": "Harrow",
+      "pct": 7.6
+     },
+     {
+      "name": "Enfield 002",
+      "la": "Enfield",
+      "pct": 6.3
+     },
+     {
+      "name": "Enfield 030",
+      "la": "Enfield",
+      "pct": 5.8
+     },
+     {
+      "name": "Harrow 012",
+      "la": "Harrow",
+      "pct": 5.6
+     }
+    ],
+    "notstated": [
+     {
+      "name": "Nottingham 022",
+      "la": "Nottingham",
+      "pct": 18.6
+     },
+     {
+      "name": "Oxford 008",
+      "la": "Oxford",
+      "pct": 18.0
+     },
+     {
+      "name": "Harrogate 008",
+      "la": "North Yorkshire",
+      "pct": 16.3
+     },
+     {
+      "name": "County Durham 030",
+      "la": "County Durham",
+      "pct": 15.8
+     },
+     {
+      "name": "Hackney 003",
+      "la": "Hackney",
+      "pct": 15.7
+     }
+    ]
+   }
+  },
+  "scot_iz": {
+   "n": 1279,
+   "none_majority": 781
+  },
+  "age": {
+   "England and Wales": [
+    {
+     "band": "Under 16",
+     "christian": 35.0,
+     "none": 43.6,
+     "muslim": 10.9,
+     "hindu": 1.9,
+     "sikh": 1.0,
+     "jewish": 0.5,
+     "buddhist": 0.2,
+     "other": 0.3,
+     "notstated": 6.5
+    },
+    {
+     "band": "16-24",
+     "christian": 31.5,
+     "none": 48.2,
+     "muslim": 9.0,
+     "hindu": 1.5,
+     "sikh": 0.9,
+     "jewish": 0.4,
+     "buddhist": 0.4,
+     "other": 0.6,
+     "notstated": 7.5
+    },
+    {
+     "band": "25-34",
+     "christian": 31.2,
+     "none": 50.6,
+     "muslim": 7.5,
+     "hindu": 2.0,
+     "sikh": 1.0,
+     "jewish": 0.4,
+     "buddhist": 0.5,
+     "other": 0.7,
+     "notstated": 6.2
+    },
+    {
+     "band": "35-49",
+     "christian": 40.6,
+     "none": 40.5,
+     "muslim": 7.7,
+     "hindu": 2.5,
+     "sikh": 1.1,
+     "jewish": 0.4,
+     "buddhist": 0.7,
+     "other": 0.8,
+     "notstated": 5.5
+    },
+    {
+     "band": "50-64",
+     "christian": 55.8,
+     "none": 31.3,
+     "muslim": 3.6,
+     "hindu": 1.3,
+     "sikh": 0.8,
+     "jewish": 0.4,
+     "buddhist": 0.6,
+     "other": 0.7,
+     "notstated": 5.6
+    },
+    {
+     "band": "65-74",
+     "christian": 68.4,
+     "none": 20.9,
+     "muslim": 2.0,
+     "hindu": 1.2,
+     "sikh": 0.7,
+     "jewish": 0.5,
+     "buddhist": 0.4,
+     "other": 0.5,
+     "notstated": 5.4
+    },
+    {
+     "band": "75+",
+     "christian": 76.7,
+     "none": 13.6,
+     "muslim": 1.4,
+     "hindu": 0.9,
+     "sikh": 0.5,
+     "jewish": 0.6,
+     "buddhist": 0.2,
+     "other": 0.2,
+     "notstated": 5.9
+    }
+   ],
+   "England": [
+    {
+     "band": "Under 16",
+     "christian": 35.3,
+     "none": 42.8,
+     "muslim": 11.3,
+     "hindu": 2.0,
+     "sikh": 1.0,
+     "jewish": 0.5,
+     "buddhist": 0.3,
+     "other": 0.3,
+     "notstated": 6.5
+    },
+    {
+     "band": "16-24",
+     "christian": 31.7,
+     "none": 47.5,
+     "muslim": 9.4,
+     "hindu": 1.6,
+     "sikh": 0.9,
+     "jewish": 0.4,
+     "buddhist": 0.4,
+     "other": 0.6,
+     "notstated": 7.6
+    },
+    {
+     "band": "25-34",
+     "christian": 31.5,
+     "none": 49.9,
+     "muslim": 7.7,
+     "hindu": 2.1,
+     "sikh": 1.0,
+     "jewish": 0.4,
+     "buddhist": 0.5,
+     "other": 0.7,
+     "notstated": 6.2
+    },
+    {
+     "band": "35-49",
+     "christian": 40.8,
+     "none": 39.9,
+     "muslim": 8.0,
+     "hindu": 2.6,
+     "sikh": 1.2,
+     "jewish": 0.4,
+     "buddhist": 0.7,
+     "other": 0.8,
+     "notstated": 5.5
+    },
+    {
+     "band": "50-64",
+     "christian": 56.1,
+     "none": 30.8,
+     "muslim": 3.7,
+     "hindu": 1.4,
+     "sikh": 0.8,
+     "jewish": 0.4,
+     "buddhist": 0.6,
+     "other": 0.7,
+     "notstated": 5.5
+    },
+    {
+     "band": "65-74",
+     "christian": 68.4,
+     "none": 20.7,
+     "muslim": 2.1,
+     "hindu": 1.3,
+     "sikh": 0.7,
+     "jewish": 0.6,
+     "buddhist": 0.4,
+     "other": 0.5,
+     "notstated": 5.3
+    },
+    {
+     "band": "75+",
+     "christian": 76.8,
+     "none": 13.5,
+     "muslim": 1.4,
+     "hindu": 0.9,
+     "sikh": 0.5,
+     "jewish": 0.7,
+     "buddhist": 0.2,
+     "other": 0.2,
+     "notstated": 5.8
+    }
+   ],
+   "Wales": [
+    {
+     "band": "Under 16",
+     "christian": 29.5,
+     "none": 58.8,
+     "muslim": 3.8,
+     "hindu": 0.4,
+     "sikh": 0.2,
+     "jewish": 0.0,
+     "buddhist": 0.1,
+     "other": 0.2,
+     "notstated": 6.9
+    },
+    {
+     "band": "16-24",
+     "christian": 27.0,
+     "none": 61.0,
+     "muslim": 3.2,
+     "hindu": 0.5,
+     "sikh": 0.2,
+     "jewish": 0.1,
+     "buddhist": 0.3,
+     "other": 0.5,
+     "notstated": 7.4
+    },
+    {
+     "band": "25-34",
+     "christian": 25.9,
+     "none": 64.0,
+     "muslim": 2.9,
+     "hindu": 0.6,
+     "sikh": 0.2,
+     "jewish": 0.0,
+     "buddhist": 0.3,
+     "other": 0.7,
+     "notstated": 5.4
+    },
+    {
+     "band": "35-49",
+     "christian": 36.6,
+     "none": 53.1,
+     "muslim": 2.8,
+     "hindu": 0.6,
+     "sikh": 0.2,
+     "jewish": 0.1,
+     "buddhist": 0.6,
+     "other": 0.8,
+     "notstated": 5.3
+    },
+    {
+     "band": "50-64",
+     "christian": 52.0,
+     "none": 39.5,
+     "muslim": 1.0,
+     "hindu": 0.3,
+     "sikh": 0.1,
+     "jewish": 0.1,
+     "buddhist": 0.4,
+     "other": 0.7,
+     "notstated": 6.0
+    },
+    {
+     "band": "65-74",
+     "christian": 67.6,
+     "none": 24.6,
+     "muslim": 0.5,
+     "hindu": 0.2,
+     "sikh": 0.1,
+     "jewish": 0.1,
+     "buddhist": 0.3,
+     "other": 0.4,
+     "notstated": 6.3
+    },
+    {
+     "band": "75+",
+     "christian": 76.0,
+     "none": 15.8,
+     "muslim": 0.3,
+     "hindu": 0.1,
+     "sikh": 0.0,
+     "jewish": 0.1,
+     "buddhist": 0.1,
+     "other": 0.2,
+     "notstated": 7.3
+    }
+   ]
+  },
+  "age_bands": [
+   "Under 16",
+   "16-24",
+   "25-34",
+   "35-49",
+   "50-64",
+   "65-74",
+   "75+"
+  ],
+  "det": {
+   "All Usual Residents": 59597558,
+   "Agnostic": 32104,
+   "Atheist": 13838,
+   "Free Thinker": 306,
+   "Humanist": 10227,
+   "No religion": 22105460,
+   "Realist": 80,
+   "Alevi": 25671,
+   "Animism": 799,
+   "Baha'i": 4714,
+   "Believe in God": 2414,
+   "Brahma Kumari": 234,
+   "Chinese Religion": 110,
+   "Church of All Religion": 22,
+   "Confucianist": 78,
+   "Deist": 1091,
+   "Druid": 2488,
+   "Druze": 623,
+   "Eckankar": 337,
+   "Heathen": 4722,
+   "Jain": 25004,
+   "Mixed Religion": 11397,
+   "Mysticism": 147,
+   "Native American Church": 83,
+   "New Age": 387,
+   "Occult": 501,
+   "Other religions": 66015,
+   "Own Belief System": 2187,
+   "Pagan": 73738,
+   "Pantheism": 2302,
+   "Rastafarian": 5954,
+   "Ravidassia": 9583,
+   "Reconstructionist": 739,
+   "Satanism": 5042,
+   "Scientology": 1854,
+   "Shamanism": 7887,
+   "Shintoism": 1382,
+   "Spiritual": 31611,
+   "Spiritualist": 33141,
+   "Taoist": 3725,
+   "Theism": 862,
+   "Thelemite": 232,
+   "Traditional African Religion": 658,
+   "Unification Church": 202,
+   "Universalist": 767,
+   "Valmiki": 1026,
+   "Vodun": 258,
+   "Wicca": 12820,
+   "Witchcraft": 1053,
+   "Yazidi": 414,
+   "Zoroastrian": 4087
+  },
+  "det_top_other": [
+   {
+    "name": "Pagan",
+    "n": 73738
+   },
+   {
+    "name": "Spiritualist",
+    "n": 33141
+   },
+   {
+    "name": "Spiritual",
+    "n": 31611
+   },
+   {
+    "name": "Alevi",
+    "n": 25671
+   },
+   {
+    "name": "Jain",
+    "n": 25004
+   },
+   {
+    "name": "Wicca",
+    "n": 12820
+   },
+   {
+    "name": "Mixed Religion",
+    "n": 11397
+   },
+   {
+    "name": "Ravidassia",
+    "n": 9583
+   },
+   {
+    "name": "Shamanism",
+    "n": 7887
+   },
+   {
+    "name": "Rastafarian",
+    "n": 5954
+   },
+   {
+    "name": "Satanism",
+    "n": 5042
+   },
+   {
+    "name": "Heathen",
+    "n": 4722
+   }
+  ],
+  "ni_hist": [
+   {
+    "year": 1861,
+    "cath": 40.9,
+    "prot3": 57.7,
+    "pres": 32.7,
+    "coi": 23.0,
+    "meth": 2.0,
+    "other": 1.3,
+    "none_ns": 0.0,
+    "total": 1396453
+   },
+   {
+    "year": 1871,
+    "cath": 39.3,
+    "prot3": 58.2,
+    "pres": 32.1,
+    "coi": 24.2,
+    "meth": 2.0,
+    "other": 2.4,
+    "none_ns": 0.0,
+    "total": 1359190
+   },
+   {
+    "year": 1881,
+    "cath": 38.0,
+    "prot3": 58.8,
+    "pres": 31.7,
+    "coi": 24.7,
+    "meth": 2.4,
+    "other": 3.1,
+    "none_ns": 0.1,
+    "total": 1304816
+   },
+   {
+    "year": 1891,
+    "cath": 36.3,
+    "prot3": 60.2,
+    "pres": 31.8,
+    "coi": 25.3,
+    "meth": 3.0,
+    "other": 3.4,
+    "none_ns": 0.2,
+    "total": 1236056
+   },
+   {
+    "year": 1901,
+    "cath": 34.8,
+    "prot3": 61.2,
+    "pres": 32.1,
+    "coi": 25.6,
+    "meth": 3.6,
+    "other": 3.9,
+    "none_ns": 0.1,
+    "total": 1236952
+   },
+   {
+    "year": 1911,
+    "cath": 34.4,
+    "prot3": 61.4,
+    "pres": 31.6,
+    "coi": 26.2,
+    "meth": 3.7,
+    "other": 4.0,
+    "none_ns": 0.2,
+    "total": 1250531
+   },
+   {
+    "year": 1926,
+    "cath": 33.5,
+    "prot3": 62.2,
+    "pres": 31.3,
+    "coi": 27.0,
+    "meth": 3.9,
+    "other": 4.2,
+    "none_ns": 0.2,
+    "total": 1256561
+   },
+   {
+    "year": 1937,
+    "cath": 33.5,
+    "prot3": 61.9,
+    "pres": 30.5,
+    "coi": 27.0,
+    "meth": 4.3,
+    "other": 4.5,
+    "none_ns": 0.2,
+    "total": 1279745
+   },
+   {
+    "year": 1951,
+    "cath": 34.4,
+    "prot3": 60.6,
+    "pres": 29.9,
+    "coi": 25.8,
+    "meth": 4.9,
+    "other": 4.6,
+    "none_ns": 0.4,
+    "total": 1370921
+   },
+   {
+    "year": 1961,
+    "cath": 34.9,
+    "prot3": 58.2,
+    "pres": 29.0,
+    "coi": 24.2,
+    "meth": 5.0,
+    "other": 5.0,
+    "none_ns": 1.9,
+    "total": 1425042
+   },
+   {
+    "year": 1971,
+    "cath": 31.4,
+    "prot3": 53.4,
+    "pres": 26.7,
+    "coi": 22.0,
+    "meth": 4.7,
+    "other": 5.8,
+    "none_ns": 9.4,
+    "total": 1519640
+   },
+   {
+    "year": 1981,
+    "cath": 28.0,
+    "prot3": 45.9,
+    "pres": 22.9,
+    "coi": 19.0,
+    "meth": 4.0,
+    "other": 7.6,
+    "none_ns": 18.5,
+    "total": 1481959
+   },
+   {
+    "year": 1991,
+    "cath": 38.4,
+    "prot3": 42.8,
+    "pres": 21.4,
+    "coi": 17.7,
+    "meth": 3.8,
+    "other": 7.8,
+    "none_ns": 11.0,
+    "total": 1577836
+   },
+   {
+    "year": 2001,
+    "cath": 40.3,
+    "prot3": 39.5,
+    "pres": 20.7,
+    "coi": 15.3,
+    "meth": 3.5,
+    "other": 6.4,
+    "none_ns": 13.9,
+    "total": 1685267
+   },
+   {
+    "year": 2011,
+    "cath": 40.8,
+    "prot3": 35.8,
+    "pres": 19.1,
+    "coi": 13.7,
+    "meth": 3.0,
+    "other": 6.6,
+    "none_ns": 16.9,
+    "total": 1810863
+   },
+   {
+    "year": 2021,
+    "cath": 42.3,
+    "prot3": 30.5,
+    "pres": 16.6,
+    "coi": 11.5,
+    "meth": 2.4,
+    "other": 8.2,
+    "none_ns": 19.0,
+    "total": 1903178
+   }
+  ],
+  "ni_h": {
+   "cath1861": 40.9,
+   "prot1861": 57.7,
+   "cath_min": 28.0,
+   "cath_min_year": 1981,
+   "prot_peak": 62.2,
+   "prot_peak_year": 1926,
+   "cath2021": 42.3,
+   "prot2021": 30.5,
+   "cross_year": 2001,
+   "nons1961": 1.9,
+   "nons2021": 19.0,
+   "n_censuses": 16
+  }
+ },
+ "osm": {
+  "total": 1624818,
+  "n_cells": 69658,
+  "by_rel": {
+   "christian": 989563,
+   "muslim": 291813,
+   "buddhist": 111463,
+   "hindu": 56870,
+   "shinto": 41061,
+   "jewish": 7527,
+   "sikh": 1970,
+   "taoist": 8924,
+   "other": 9237,
+   "untagged": 106390
+  },
+  "by_den": {
+   "catholic": 318587,
+   "orthodox": 66666,
+   "anglican": 25172,
+   "lutheran": 31485,
+   "reformed": 18432,
+   "baptist": 49384,
+   "methodist": 22041,
+   "pentecostal": 17880,
+   "evangelical": 14095,
+   "adventist": 6173,
+   "lds": 8514,
+   "jw": 13259,
+   "protestant": 24260,
+   "otherchr": 16019,
+   "untagged": 357596
+  },
+  "christian_den_tagged": 631967,
+  "christian_den_tagged_pct": 63.9,
+  "untagged_rel_pct": 6.5,
+  "region_den": {
+   "Asia-Pacific": [
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 13452,
+     "pct": 38.9
+    },
+    {
+     "k": "otherchr",
+     "name": "Other Christian",
+     "n": 4103,
+     "pct": 11.9
+    },
+    {
+     "k": "orthodox",
+     "name": "Orthodox and Oriental",
+     "n": 2538,
+     "pct": 7.3
+    },
+    {
+     "k": "anglican",
+     "name": "Anglican and Episcopal",
+     "n": 2044,
+     "pct": 5.9
+    },
+    {
+     "k": "protestant",
+     "name": "Protestant (unspecified)",
+     "n": 1994,
+     "pct": 5.8
+    },
+    {
+     "k": "baptist",
+     "name": "Baptist",
+     "n": 1772,
+     "pct": 5.1
+    }
+   ],
+   "Europe": [
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 243260,
+     "pct": 63.0
+    },
+    {
+     "k": "orthodox",
+     "name": "Orthodox and Oriental",
+     "n": 55651,
+     "pct": 14.4
+    },
+    {
+     "k": "lutheran",
+     "name": "Lutheran",
+     "n": 19865,
+     "pct": 5.1
+    },
+    {
+     "k": "anglican",
+     "name": "Anglican and Episcopal",
+     "n": 17730,
+     "pct": 4.6
+    },
+    {
+     "k": "protestant",
+     "name": "Protestant (unspecified)",
+     "n": 17469,
+     "pct": 4.5
+    },
+    {
+     "k": "reformed",
+     "name": "Reformed and Presbyterian",
+     "n": 6745,
+     "pct": 1.7
+    }
+   ],
+   "Latin America-Caribbean": [
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 39257,
+     "pct": 61.2
+    },
+    {
+     "k": "pentecostal",
+     "name": "Pentecostal",
+     "n": 6077,
+     "pct": 9.5
+    },
+    {
+     "k": "evangelical",
+     "name": "Evangelical",
+     "n": 4868,
+     "pct": 7.6
+    },
+    {
+     "k": "jw",
+     "name": "Jehovah's Witnesses",
+     "n": 2502,
+     "pct": 3.9
+    },
+    {
+     "k": "baptist",
+     "name": "Baptist",
+     "n": 2383,
+     "pct": 3.7
+    },
+    {
+     "k": "protestant",
+     "name": "Protestant (unspecified)",
+     "n": 2139,
+     "pct": 3.3
+    }
+   ],
+   "Middle East-North Africa": [
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 428,
+     "pct": 53.9
+    },
+    {
+     "k": "orthodox",
+     "name": "Orthodox and Oriental",
+     "n": 265,
+     "pct": 33.4
+    },
+    {
+     "k": "anglican",
+     "name": "Anglican and Episcopal",
+     "n": 23,
+     "pct": 2.9
+    },
+    {
+     "k": "otherchr",
+     "name": "Other Christian",
+     "n": 18,
+     "pct": 2.3
+    },
+    {
+     "k": "evangelical",
+     "name": "Evangelical",
+     "n": 16,
+     "pct": 2.0
+    },
+    {
+     "k": "baptist",
+     "name": "Baptist",
+     "n": 14,
+     "pct": 1.8
+    }
+   ],
+   "North America": [
+    {
+     "k": "baptist",
+     "name": "Baptist",
+     "n": 39999,
+     "pct": 32.6
+    },
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 16969,
+     "pct": 13.8
+    },
+    {
+     "k": "methodist",
+     "name": "Methodist",
+     "n": 15626,
+     "pct": 12.7
+    },
+    {
+     "k": "lutheran",
+     "name": "Lutheran",
+     "n": 9690,
+     "pct": 7.9
+    },
+    {
+     "k": "reformed",
+     "name": "Reformed and Presbyterian",
+     "n": 8474,
+     "pct": 6.9
+    },
+    {
+     "k": "jw",
+     "name": "Jehovah's Witnesses",
+     "n": 5398,
+     "pct": 4.4
+    }
+   ],
+   "Sub-Saharan Africa": [
+    {
+     "k": "orthodox",
+     "name": "Orthodox and Oriental",
+     "n": 5905,
+     "pct": 26.2
+    },
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 5076,
+     "pct": 22.5
+    },
+    {
+     "k": "pentecostal",
+     "name": "Pentecostal",
+     "n": 2736,
+     "pct": 12.2
+    },
+    {
+     "k": "protestant",
+     "name": "Protestant (unspecified)",
+     "n": 1456,
+     "pct": 6.5
+    },
+    {
+     "k": "evangelical",
+     "name": "Evangelical",
+     "n": 1415,
+     "pct": 6.3
+    },
+    {
+     "k": "anglican",
+     "name": "Anglican and Episcopal",
+     "n": 959,
+     "pct": 4.3
+    }
+   ]
+  },
+  "region": {
+   "Asia-Pacific": {
+    "n": 528886,
+    "per100k": 11.6,
+    "christian": 68992,
+    "muslim": 191583,
+    "christian_per100k": 25.7,
+    "muslim_per100k": 16.1
+   },
+   "Europe": {
+    "n": 526005,
+    "per100k": 69.9,
+    "christian": 495841,
+    "muslim": 14175,
+    "christian_per100k": 98.2,
+    "muslim_per100k": 31.1
+   },
+   "Latin America-Caribbean": {
+    "n": 121785,
+    "per100k": 18.8,
+    "christian": 104988,
+    "muslim": 306,
+    "christian_per100k": 19.2,
+    "muslim_per100k": 40.8
+   },
+   "Middle East-North Africa": {
+    "n": 73282,
+    "per100k": 16.7,
+    "christian": 2376,
+    "muslim": 61883,
+    "christian_per100k": 18.4,
+    "muslim_per100k": 14.9
+   },
+   "North America": {
+    "n": 292773,
+    "per100k": 77.5,
+    "christian": 272214,
+    "muslim": 1537,
+    "christian_per100k": 114.6,
+    "muslim_per100k": 26.0
+   },
+   "Sub-Saharan Africa": {
+    "n": 79688,
+    "per100k": 7.1,
+    "christian": 43566,
+    "muslim": 21846,
+    "christian_per100k": 6.2,
+    "muslim_per100k": 5.9
+   }
+  },
+  "top_countries": [
+   {
+    "iso": "USA",
+    "name": "United States of America",
+    "n": 271981
+   },
+   {
+    "iso": "IDN",
+    "name": "Indonesia",
+    "n": 89639
+   },
+   {
+    "iso": "JPN",
+    "name": "Japan",
+    "n": 78474
+   },
+   {
+    "iso": "IND",
+    "name": "India",
+    "n": 73277
+   },
+   {
+    "iso": "DEU",
+    "name": "Germany",
+    "n": 72073
+   },
+   {
+    "iso": "ITA",
+    "name": "Italy",
+    "n": 68362
+   },
+   {
+    "iso": "FRA",
+    "name": "France",
+    "n": 60951
+   },
+   {
+    "iso": "BRA",
+    "name": "Brazil",
+    "n": 52841
+   },
+   {
+    "iso": "TUR",
+    "name": "Turkey",
+    "n": 47839
+   },
+   {
+    "iso": "GBR",
+    "name": "United Kingdom",
+    "n": 42068
+   }
+  ],
+  "top_muslim": [
+   {
+    "iso": "IDN",
+    "name": "Indonesia",
+    "n": 75422,
+    "pct": 25.8
+   },
+   {
+    "iso": "TUR",
+    "name": "Turkey",
+    "n": 46400,
+    "pct": 15.9
+   },
+   {
+    "iso": "IRN",
+    "name": "Iran",
+    "n": 16222,
+    "pct": 5.6
+   },
+   {
+    "iso": "SAU",
+    "name": "Saudi Arabia",
+    "n": 13251,
+    "pct": 4.5
+   },
+   {
+    "iso": "BGD",
+    "name": "Bangladesh",
+    "n": 11923,
+    "pct": 4.1
+   }
+  ],
+  "top_buddhist": [
+   {
+    "iso": "JPN",
+    "name": "Japan",
+    "n": 30370,
+    "pct": 27.2
+   },
+   {
+    "iso": "MMR",
+    "name": "Myanmar",
+    "n": 26117,
+    "pct": 23.4
+   },
+   {
+    "iso": "THA",
+    "name": "Thailand",
+    "n": 19206,
+    "pct": 17.2
+   },
+   {
+    "iso": "CHN",
+    "name": "China",
+    "n": 11467,
+    "pct": 10.3
+   },
+   {
+    "iso": "LKA",
+    "name": "Sri Lanka",
+    "n": 5085,
+    "pct": 4.6
+   }
+  ],
+  "top_hindu": [
+   {
+    "iso": "IND",
+    "name": "India",
+    "n": 41285,
+    "pct": 72.6
+   },
+   {
+    "iso": "NPL",
+    "name": "Nepal",
+    "n": 6492,
+    "pct": 11.4
+   },
+   {
+    "iso": "IDN",
+    "name": "Indonesia",
+    "n": 2745,
+    "pct": 4.8
+   },
+   {
+    "iso": "LKA",
+    "name": "Sri Lanka",
+    "n": 2116,
+    "pct": 3.7
+   },
+   {
+    "iso": "BGD",
+    "name": "Bangladesh",
+    "n": 1368,
+    "pct": 2.4
+   }
+  ],
+  "top_shinto": [
+   {
+    "iso": "JPN",
+    "name": "Japan",
+    "n": 40797,
+    "pct": 99.4
+   },
+   {
+    "iso": "CHN",
+    "name": "China",
+    "n": 25,
+    "pct": 0.1
+   },
+   {
+    "iso": "USA",
+    "name": "United States of America",
+    "n": 23,
+    "pct": 0.1
+   },
+   {
+    "iso": "TWN",
+    "name": "Taiwan",
+    "n": 20,
+    "pct": 0.0
+   },
+   {
+    "iso": "PAK",
+    "name": "Pakistan",
+    "n": 14,
+    "pct": 0.0
+   }
+  ],
+  "top_jewish": [
+   {
+    "iso": "USA",
+    "name": "United States of America",
+    "n": 2248,
+    "pct": 29.9
+   },
+   {
+    "iso": "ISR",
+    "name": "Israel",
+    "n": 2031,
+    "pct": 27.0
+   },
+   {
+    "iso": "PSX",
+    "name": "Palestine",
+    "n": 831,
+    "pct": 11.0
+   },
+   {
+    "iso": "FRA",
+    "name": "France",
+    "n": 276,
+    "pct": 3.7
+   },
+   {
+    "iso": "GBR",
+    "name": "United Kingdom",
+    "n": 227,
+    "pct": 3.0
+   }
+  ],
+  "top_sikh": [
+   {
+    "iso": "IND",
+    "name": "India",
+    "n": 1259,
+    "pct": 63.9
+   },
+   {
+    "iso": "GBR",
+    "name": "United Kingdom",
+    "n": 207,
+    "pct": 10.5
+   },
+   {
+    "iso": "USA",
+    "name": "United States of America",
+    "n": 113,
+    "pct": 5.7
+   },
+   {
+    "iso": "CAN",
+    "name": "Canada",
+    "n": 89,
+    "pct": 4.5
+   },
+   {
+    "iso": "MYS",
+    "name": "Malaysia",
+    "n": 68,
+    "pct": 3.5
+   }
+  ],
+  "gbr": {
+   "n": 42068,
+   "christian": 38818,
+   "muslim": 1409,
+   "den": [
+    {
+     "k": "anglican",
+     "name": "Anglican and Episcopal",
+     "n": 16952
+    },
+    {
+     "k": "methodist",
+     "name": "Methodist",
+     "n": 3418
+    },
+    {
+     "k": "catholic",
+     "name": "Catholic",
+     "n": 3264
+    },
+    {
+     "k": "reformed",
+     "name": "Reformed and Presbyterian",
+     "n": 2709
+    },
+    {
+     "k": "baptist",
+     "name": "Baptist",
+     "n": 1990
+    },
+    {
+     "k": "otherchr",
+     "name": "Other Christian",
+     "n": 1600
+    }
+   ]
+  }
+ }
+}
