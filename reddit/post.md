@@ -13,5 +13,5 @@ Source: Pew Research Center, 'How the Global Religious Landscape Changed From 20
 Tools: Python (pandas, shapely, pyproj, matplotlib); Leaflet for the interactive map.
 
 Interactive version: https://maps.tristanhotham.com/religion-map/
-Paper: {{DOI_URL}}
+Paper: https://doi.org/10.5281/zenodo.23842991
 Blog post: https://blog.tristanhotham.com/2026/10/31/religion-map/

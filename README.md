@@ -3,7 +3,7 @@
 An interactive map and data study of religious affiliation: the religious make-up of 201 countries and territories in 2010 and 2020 (Pew Research Center estimates), the censuses of the four UK nations harmonised down to 7,264 neighbourhoods in England and Wales, a Northern Ireland series from 1861 to 2021, and 1,624,818 places of worship mapped in OpenStreetMap.
 
 Interactive page: https://maps.tristanhotham.com/religion-map/
-Paper: https://doi.org/{{DOI}}
+Paper: https://doi.org/10.5281/zenodo.23842991
 Blog post: https://blog.tristanhotham.com/2026/10/31/religion-map/
 
 ## Headline results
@@ -72,7 +72,7 @@ node code/qa.js                 # screenshots and console check
 
 ## Citation
 
-Hotham, T. (2026) Faith on the map: religion around the world and across the UK, from Pew Research Center estimates, the UK censuses and OpenStreetMap. Zenodo. https://doi.org/{{DOI}}
+Hotham, T. (2026) Faith on the map: religion around the world and across the UK, from Pew Research Center estimates, the UK censuses and OpenStreetMap. Zenodo. https://doi.org/10.5281/zenodo.23842991
 
 Dr Tristan Hotham, Independent researcher. ORCID 0000-0003-4931-9349.
 
